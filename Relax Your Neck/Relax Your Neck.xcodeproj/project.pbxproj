@@ -7,27 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C2CA76D5274B04F300767403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA76D4274B04F300767403 /* AppDelegate.swift */; };
-		C2CA76D7274B04F300767403 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA76D6274B04F300767403 /* SceneDelegate.swift */; };
-		C2CA76D9274B04F300767403 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2CA76D8274B04F300767403 /* ViewController.swift */; };
-		C2CA76DC274B04F300767403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2CA76DA274B04F300767403 /* Main.storyboard */; };
-		C2CA76DE274B04F500767403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2CA76DD274B04F500767403 /* Assets.xcassets */; };
-		C2CA76E1274B04F500767403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2CA76DF274B04F500767403 /* LaunchScreen.storyboard */; };
+		CC1FDF512751AAF2000D1D99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */; };
+		CC1FDF532751AAF2000D1D99 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF522751AAF2000D1D99 /* GameScene.sks */; };
+		CC1FDF552751AAF2000D1D99 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF542751AAF2000D1D99 /* Actions.sks */; };
+		CC1FDF572751AAF2000D1D99 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FDF562751AAF2000D1D99 /* GameScene.swift */; };
+		CC1FDF592751AAF2000D1D99 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FDF582751AAF2000D1D99 /* GameViewController.swift */; };
+		CC1FDF5C2751AAF2000D1D99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF5A2751AAF2000D1D99 /* Main.storyboard */; };
+		CC1FDF5E2751AAF6000D1D99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF5D2751AAF6000D1D99 /* Assets.xcassets */; };
+		CC1FDF612751AAF6000D1D99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF5F2751AAF6000D1D99 /* LaunchScreen.storyboard */; };
+		CC1FDF682752F049000D1D99 /* RandomFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FDF672752F049000D1D99 /* RandomFunc.swift */; };
+		CC1FDF6A27530128000D1D99 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FDF6927530128000D1D99 /* HomeViewController.swift */; };
+		CC1FDF6C2753172D000D1D99 /* 04B_19__.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF6B2753172D000D1D99 /* 04B_19__.TTF */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C2CA76D1274B04F300767403 /* Relax Your Neck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Relax Your Neck.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C2CA76D4274B04F300767403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C2CA76D6274B04F300767403 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C2CA76D8274B04F300767403 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		C2CA76DB274B04F300767403 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C2CA76DD274B04F500767403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C2CA76E0274B04F500767403 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C2CA76E2274B04F500767403 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC1FDF4D2751AAF2000D1D99 /* Relax Your Neck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Relax Your Neck.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		CC1FDF522751AAF2000D1D99 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		CC1FDF542751AAF2000D1D99 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		CC1FDF562751AAF2000D1D99 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		CC1FDF582751AAF2000D1D99 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		CC1FDF5B2751AAF2000D1D99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CC1FDF5D2751AAF6000D1D99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CC1FDF602751AAF6000D1D99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CC1FDF672752F049000D1D99 /* RandomFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomFunc.swift; sourceTree = "<group>"; };
+		CC1FDF6927530128000D1D99 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		CC1FDF6B2753172D000D1D99 /* 04B_19__.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = 04B_19__.TTF; sourceTree = "<group>"; };
+		CC1FDF6D2753186E000D1D99 /* Relax-Your-Neck-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Relax-Your-Neck-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		C2CA76CE274B04F200767403 /* Frameworks */ = {
+		CC1FDF4A2751AAF2000D1D99 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,32 +47,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C2CA76C8274B04F200767403 = {
+		CC1FDF442751AAF2000D1D99 = {
 			isa = PBXGroup;
 			children = (
-				C2CA76D3274B04F300767403 /* Relax Your Neck */,
-				C2CA76D2274B04F300767403 /* Products */,
+				CC1FDF4F2751AAF2000D1D99 /* Relax Your Neck */,
+				CC1FDF4E2751AAF2000D1D99 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		C2CA76D2274B04F300767403 /* Products */ = {
+		CC1FDF4E2751AAF2000D1D99 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C2CA76D1274B04F300767403 /* Relax Your Neck.app */,
+				CC1FDF4D2751AAF2000D1D99 /* Relax Your Neck.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C2CA76D3274B04F300767403 /* Relax Your Neck */ = {
+		CC1FDF4F2751AAF2000D1D99 /* Relax Your Neck */ = {
 			isa = PBXGroup;
 			children = (
-				C2CA76D4274B04F300767403 /* AppDelegate.swift */,
-				C2CA76D6274B04F300767403 /* SceneDelegate.swift */,
-				C2CA76D8274B04F300767403 /* ViewController.swift */,
-				C2CA76DA274B04F300767403 /* Main.storyboard */,
-				C2CA76DD274B04F500767403 /* Assets.xcassets */,
-				C2CA76DF274B04F500767403 /* LaunchScreen.storyboard */,
-				C2CA76E2274B04F500767403 /* Info.plist */,
+				CC1FDF6D2753186E000D1D99 /* Relax-Your-Neck-Info.plist */,
+				CC1FDF6B2753172D000D1D99 /* 04B_19__.TTF */,
+				CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */,
+				CC1FDF522751AAF2000D1D99 /* GameScene.sks */,
+				CC1FDF542751AAF2000D1D99 /* Actions.sks */,
+				CC1FDF562751AAF2000D1D99 /* GameScene.swift */,
+				CC1FDF672752F049000D1D99 /* RandomFunc.swift */,
+				CC1FDF582751AAF2000D1D99 /* GameViewController.swift */,
+				CC1FDF5A2751AAF2000D1D99 /* Main.storyboard */,
+				CC1FDF6927530128000D1D99 /* HomeViewController.swift */,
+				CC1FDF5D2751AAF6000D1D99 /* Assets.xcassets */,
+				CC1FDF5F2751AAF6000D1D99 /* LaunchScreen.storyboard */,
 			);
 			path = "Relax Your Neck";
 			sourceTree = "<group>";
@@ -70,13 +85,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C2CA76D0274B04F200767403 /* Relax Your Neck */ = {
+		CC1FDF4C2751AAF2000D1D99 /* Relax Your Neck */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2CA76E5274B04F500767403 /* Build configuration list for PBXNativeTarget "Relax Your Neck" */;
+			buildConfigurationList = CC1FDF642751AAF6000D1D99 /* Build configuration list for PBXNativeTarget "Relax Your Neck" */;
 			buildPhases = (
-				C2CA76CD274B04F200767403 /* Sources */,
-				C2CA76CE274B04F200767403 /* Frameworks */,
-				C2CA76CF274B04F200767403 /* Resources */,
+				CC1FDF492751AAF2000D1D99 /* Sources */,
+				CC1FDF4A2751AAF2000D1D99 /* Frameworks */,
+				CC1FDF4B2751AAF2000D1D99 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -84,25 +99,25 @@
 			);
 			name = "Relax Your Neck";
 			productName = "Relax Your Neck";
-			productReference = C2CA76D1274B04F300767403 /* Relax Your Neck.app */;
+			productReference = CC1FDF4D2751AAF2000D1D99 /* Relax Your Neck.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		C2CA76C9274B04F200767403 /* Project object */ = {
+		CC1FDF452751AAF2000D1D99 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
-					C2CA76D0274B04F200767403 = {
+					CC1FDF4C2751AAF2000D1D99 = {
 						CreatedOnToolsVersion = 13.1;
 					};
 				};
 			};
-			buildConfigurationList = C2CA76CC274B04F200767403 /* Build configuration list for PBXProject "Relax Your Neck" */;
+			buildConfigurationList = CC1FDF482751AAF2000D1D99 /* Build configuration list for PBXProject "Relax Your Neck" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +125,60 @@
 				en,
 				Base,
 			);
-			mainGroup = C2CA76C8274B04F200767403;
-			productRefGroup = C2CA76D2274B04F300767403 /* Products */;
+			mainGroup = CC1FDF442751AAF2000D1D99;
+			productRefGroup = CC1FDF4E2751AAF2000D1D99 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C2CA76D0274B04F200767403 /* Relax Your Neck */,
+				CC1FDF4C2751AAF2000D1D99 /* Relax Your Neck */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		C2CA76CF274B04F200767403 /* Resources */ = {
+		CC1FDF4B2751AAF2000D1D99 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2CA76E1274B04F500767403 /* LaunchScreen.storyboard in Resources */,
-				C2CA76DE274B04F500767403 /* Assets.xcassets in Resources */,
-				C2CA76DC274B04F300767403 /* Main.storyboard in Resources */,
+				CC1FDF5C2751AAF2000D1D99 /* Main.storyboard in Resources */,
+				CC1FDF6C2753172D000D1D99 /* 04B_19__.TTF in Resources */,
+				CC1FDF532751AAF2000D1D99 /* GameScene.sks in Resources */,
+				CC1FDF5E2751AAF6000D1D99 /* Assets.xcassets in Resources */,
+				CC1FDF612751AAF6000D1D99 /* LaunchScreen.storyboard in Resources */,
+				CC1FDF552751AAF2000D1D99 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		C2CA76CD274B04F200767403 /* Sources */ = {
+		CC1FDF492751AAF2000D1D99 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2CA76D9274B04F300767403 /* ViewController.swift in Sources */,
-				C2CA76D5274B04F300767403 /* AppDelegate.swift in Sources */,
-				C2CA76D7274B04F300767403 /* SceneDelegate.swift in Sources */,
+				CC1FDF6A27530128000D1D99 /* HomeViewController.swift in Sources */,
+				CC1FDF682752F049000D1D99 /* RandomFunc.swift in Sources */,
+				CC1FDF572751AAF2000D1D99 /* GameScene.swift in Sources */,
+				CC1FDF592751AAF2000D1D99 /* GameViewController.swift in Sources */,
+				CC1FDF512751AAF2000D1D99 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		C2CA76DA274B04F300767403 /* Main.storyboard */ = {
+		CC1FDF5A2751AAF2000D1D99 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C2CA76DB274B04F300767403 /* Base */,
+				CC1FDF5B2751AAF2000D1D99 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		C2CA76DF274B04F500767403 /* LaunchScreen.storyboard */ = {
+		CC1FDF5F2751AAF6000D1D99 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				C2CA76E0274B04F500767403 /* Base */,
+				CC1FDF602751AAF6000D1D99 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +186,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		C2CA76E3274B04F500767403 /* Debug */ = {
+		CC1FDF622751AAF6000D1D99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -217,7 +237,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -227,7 +247,7 @@
 			};
 			name = Debug;
 		};
-		C2CA76E4274B04F500767403 /* Release */ = {
+		CC1FDF632751AAF6000D1D99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -272,7 +292,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -282,19 +302,20 @@
 			};
 			name = Release;
 		};
-		C2CA76E6274B04F500767403 /* Debug */ = {
+		CC1FDF652751AAF6000D1D99 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q3MAQ3CMN;
+				DEVELOPMENT_TEAM = F69WJ27LN4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Relax Your Neck/Info.plist";
+				INFOPLIST_FILE = "Relax-Your-Neck-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -302,7 +323,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Yongjia-Xu.Relax-Your-Neck";
+				PRODUCT_BUNDLE_IDENTIFIER = "FinalProject.Relax-Your-Neck";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -310,19 +331,20 @@
 			};
 			name = Debug;
 		};
-		C2CA76E7274B04F500767403 /* Release */ = {
+		CC1FDF662751AAF6000D1D99 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q3MAQ3CMN;
+				DEVELOPMENT_TEAM = F69WJ27LN4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Relax Your Neck/Info.plist";
+				INFOPLIST_FILE = "Relax-Your-Neck-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -330,7 +352,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "Yongjia-Xu.Relax-Your-Neck";
+				PRODUCT_BUNDLE_IDENTIFIER = "FinalProject.Relax-Your-Neck";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -341,25 +363,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C2CA76CC274B04F200767403 /* Build configuration list for PBXProject "Relax Your Neck" */ = {
+		CC1FDF482751AAF2000D1D99 /* Build configuration list for PBXProject "Relax Your Neck" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C2CA76E3274B04F500767403 /* Debug */,
-				C2CA76E4274B04F500767403 /* Release */,
+				CC1FDF622751AAF6000D1D99 /* Debug */,
+				CC1FDF632751AAF6000D1D99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2CA76E5274B04F500767403 /* Build configuration list for PBXNativeTarget "Relax Your Neck" */ = {
+		CC1FDF642751AAF6000D1D99 /* Build configuration list for PBXNativeTarget "Relax Your Neck" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C2CA76E6274B04F500767403 /* Debug */,
-				C2CA76E7274B04F500767403 /* Release */,
+				CC1FDF652751AAF6000D1D99 /* Debug */,
+				CC1FDF662751AAF6000D1D99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = C2CA76C9274B04F200767403 /* Project object */;
+	rootObject = CC1FDF452751AAF2000D1D99 /* Project object */;
 }
