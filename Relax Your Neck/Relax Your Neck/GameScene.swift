@@ -9,15 +9,12 @@ import SpriteKit
 import GameplayKit
 
 
-
 struct PhysicsCat {         // Physics body
     static let Character : UInt32 = 0x1 << 1
     static let Ground : UInt32 = 0x1 << 2
     static let Wall : UInt32 = 0x1 << 3
     static let Score : UInt32 = 0x1 << 4
 }
-
-
 
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
@@ -92,8 +89,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.addChild(Ground)
         
         // Set the character that user controls
-        Character = SKSpriteNode(imageNamed: "Ghost")
-        Character.size = CGSize(width: 60, height: 70)
+        Character = SKSpriteNode(imageNamed: "mustang")
+        Character.size = CGSize(width: 110, height: 55)
         Character.position = CGPoint(x: 0 - Character.frame.width, y: 0)
         Character.physicsBody = SKPhysicsBody(circleOfRadius: Character.frame.height/2)
         Character.physicsBody?.categoryBitMask = PhysicsCat.Character
@@ -106,6 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     
+    // ===================== Set the Opencv there ========================
     override func didMove(to view: SKView) {
         CreateScene()       // Create the scene at the begining
     }
@@ -113,7 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     // Create the game over buttom
     func createBTN(){
-        endBTN = SKSpriteNode(imageNamed: "gameover") // Load that image
+        endBTN = SKSpriteNode(imageNamed: "game_over") // Load that image
         endBTN.size = CGSize(width: 200, height: 100)
         endBTN.position = CGPoint(x: 0, y: 0)
         endBTN.zPosition = 5
@@ -145,8 +143,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             }))
             createBTN()             // Create the game over buttom
         }
-    
     }
+    
     
     // A function for pausing the game
     func gamePaused(){
@@ -198,7 +196,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             else if(location.x < -self.frame.width/2+150 && location.y < -self.frame.height/2+70){      // If the user is clicking the pause button
                 gamePaused()            // Processing pause/unpause
             }
-            else{           // Moving the character
+            else{           // Moving the character (may be changed with opencv)
                 Character.position = CGPoint(x: Character.position.x, y: location.y)
             }
         }
@@ -219,7 +217,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         topWall.setScale(0.5)
         btmWall.setScale(0.5)
         
-        
         // Add the physical info for the wall pair
         topWall.zRotation = CGFloat(Double.pi)
         topWall.physicsBody = SKPhysicsBody(rectangleOf: topWall.size)
@@ -229,14 +226,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         topWall.physicsBody?.isDynamic = false
         topWall.physicsBody?.affectedByGravity = false
         
-        
         btmWall.physicsBody = SKPhysicsBody(rectangleOf: btmWall.size)
         btmWall.physicsBody?.categoryBitMask = PhysicsCat.Wall
         btmWall.physicsBody?.collisionBitMask = PhysicsCat.Character
         btmWall.physicsBody?.contactTestBitMask = PhysicsCat.Character
         btmWall.physicsBody?.isDynamic = false
         btmWall.physicsBody?.affectedByGravity = false
-        
         
         // It is the node that means the character is passed
         let scoreNode = SKSpriteNode()
@@ -249,10 +244,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         scoreNode.physicsBody?.collisionBitMask = 0
         scoreNode.physicsBody?.contactTestBitMask = PhysicsCat.Character
         
-        
         wallPair.addChild(topWall)
         wallPair.addChild(btmWall)
-        
         
         // The location of those two walls should be random
         let randomPosition = CGFloat.random(min: -200, max: 200)
@@ -264,6 +257,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     
+    // ================= Doing face detection there, openCV should work in every frame.
+    // Use the gamePaused function if not detected or redetected.
     override func update(_ currentTime: TimeInterval) {
         if gameStatus == "start"{       // Update the background while the game is processing
             enumerateChildNodes(withName: "background", using: ({
