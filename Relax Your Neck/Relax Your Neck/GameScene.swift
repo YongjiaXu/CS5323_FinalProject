@@ -4,9 +4,13 @@
 //
 //  Created by xuan zhai on 11/26/21.
 //
+// The game part is inspired by https://www.youtube.com/watch?v=D7ntzPFvMf0
 
 import SpriteKit
 import GameplayKit
+import UIKit
+import AVFoundation
+import Accelerate
 
 
 struct PhysicsCat {         // Physics body
@@ -18,6 +22,13 @@ struct PhysicsCat {         // Physics body
 
 
 class GameScene: SKScene, SKPhysicsContactDelegate{
+    
+    var videoManager: VideoAnalgesic! = nil // OpenCV manager
+    let bridge = OpenCVBridge()         // OpenCV processor
+    var height = CGFloat()              // The current height of the mustang
+    var detected = Bool()               // Is face detected?
+    var detecttolerance = Int()     // The tolernce of undetected, max is 5.
+    
     
     var wallPair = SKNode()     // A pair of top and bottom wall
     var Ground = SKSpriteNode()     // The ground
@@ -40,11 +51,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.removeAllChildren()
         self.removeAllActions()     // Remove all the actions and nodes
         gameStatus = "end"          // Reset the game status
+        self.videoManager.stop()
         GameViewController.scoreresult = self.score // Reset the static data
         self.gamevc?.dismiss(animated: true) // Discard the scene
     }
     
     
+    // ===================== Set the Opencv there ========================
+    // Initialize the Scene
     func CreateScene(){
         self.physicsWorld.contactDelegate = self
         
@@ -59,13 +73,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             self.addChild(background)
         }
         gameStatus = "notstart"     // Initialize the game status
-        
-        // Set the pause button at bottom left
-        pausedBTN.position = CGPoint(x: -self.frame.width/2+70, y: -self.frame.height/2+10)
-        pausedBTN.fontName = "04b_19"
-        pausedBTN.text = "pause"
-        pausedBTN.zPosition = 4
-        self.addChild(pausedBTN)
         
         // Set the Score Label
         scoreLbl.position = CGPoint(x: 0, y: 0+self.frame.height/3.5)
@@ -103,8 +110,62 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     }
     
     
-    // ===================== Set the Opencv there ========================
+    // Initialize the nose  detection
+    func CreateDetection(){
+        self.detecttolerance = 0;   // Set all variables to init
+        self.detected = false
+        self.bridge.loadHaarCascade(withFilename: "nose")   // Load the data for nose
+        self.videoManager = VideoAnalgesic()
+        self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.front) // Use front camer
+        self.videoManager.setProcessingBlock(newProcessBlock: self.processImageSwift)
+        
+        if !videoManager.isRunning{
+            videoManager.start()        // Start the videoManager
+        }
+    }
+    
+    
+    // Proess the image captured
+    func processImageSwift(inputImage:CIImage) -> CIImage{
+        var retImage = inputImage
+        self.bridge.setTransforms(self.videoManager.transform)
+        self.bridge.setImage(retImage, withBounds: inputImage.extent, andContext: self.videoManager.getCIContext())
+        
+        
+        let result = self.bridge.processNose()      // Find the result of processing nose
+        if Int(result![0]) == 0{            // If not detected
+            detecttolerance = detecttolerance + 1       // Update the tolerance
+            if(detecttolerance > 5){            // If reach the maximum
+                detected = false            // Mark it as not detected
+            }
+        }
+        else{                               // If detected
+            let newheight = self.frame.height  - 2*self.frame.height*CGFloat(result![1])/CGFloat(result![2])
+            if abs(height-newheight) > 200 && height != 0 && detecttolerance == 0 {
+                // If the height has dramatically changed, and it's not at the beginning
+                // Maybe it got wrong detection, we choose to discard it.
+            }
+            else{
+                height = newheight+50  // Else update the height for character
+            }
+            detecttolerance = 0     // Update the detecttolerance, mark it as detected.
+            detected = true
+        }
+        
+        retImage = self.bridge.getImageComposite()
+        return retImage
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     override func didMove(to view: SKView) {
+        CreateDetection()
         CreateScene()       // Create the scene at the begining
     }
     
@@ -186,18 +247,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 let removePipes = SKAction.removeFromParent()
                 // The the moving function up
                 moveAndRemove = SKAction.sequence([movePipes, removePipes])
-                Character.position = CGPoint(x: Character.position.x, y: location.y)
+                Character.position = CGPoint(x: Character.position.x, y: self.height)
             }
             else if gameStatus == "end"{    // If the game is over
                 if endBTN.contains(location){       // By touching the game over button
                     BacktoHome()                // Process that end game
                 }
             }
-            else if(location.x < -self.frame.width/2+150 && location.y < -self.frame.height/2+70){      // If the user is clicking the pause button
+            else if gameStatus == "start"{      // If the user is touching the screen
                 gamePaused()            // Processing pause/unpause
             }
-            else{           // Moving the character (may be changed with opencv)
-                Character.position = CGPoint(x: Character.position.x, y: location.y)
+            else if gameStatus == "paused" && detected == true{
+                gamePaused()        // If the user wants to resume, and the face is ready. Do resume.
             }
         }
     }
@@ -248,7 +309,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         wallPair.addChild(btmWall)
         
         // The location of those two walls should be random
-        let randomPosition = CGFloat.random(min: -200, max: 200)
+        let randomPosition = CGFloat.random(min: -200, max: 100)
         wallPair.position.y = wallPair.position.y + randomPosition
         wallPair.addChild(scoreNode)
         
@@ -269,6 +330,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                     bg.position = CGPoint(x: bg.position.x + bg.size.width*2, y: bg.position.y)
                 }
             }))
+            
+            if detected == true{ // If got face detected, update the character's position
+                Character.position = CGPoint(x: Character.position.x, y: self.height)
+            }
+            else{
+               gamePaused() // If not detected, pause the game.
+            }
         }
     }
 }
