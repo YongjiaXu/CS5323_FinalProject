@@ -116,7 +116,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.detected = false
         self.bridge.loadHaarCascade(withFilename: "nose")   // Load the data for nose
         self.videoManager = VideoAnalgesic()
-        self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.front) // Use front camer
+        self.videoManager.setCameraPosition(position: AVCaptureDevice.Position.front) // Use front camera
         self.videoManager.setProcessingBlock(newProcessBlock: self.processImageSwift)
         
         if !videoManager.isRunning{
@@ -135,7 +135,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         let result = self.bridge.processNose()      // Find the result of processing nose
         if Int(result![0]) == 0{            // If not detected
             detecttolerance = detecttolerance + 1       // Update the tolerance
-            if(detecttolerance > 5){            // If reach the maximum
+            if(detecttolerance > 3){            // If reach the maximum
                 detected = false            // Mark it as not detected
             }
         }
@@ -146,7 +146,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 // Maybe it got wrong detection, we choose to discard it.
             }
             else{
-                height = newheight+50  // Else update the height for character
+                height = newheight+100  // Else update the height for character
             }
             detecttolerance = 0     // Update the detecttolerance, mark it as detected.
             detected = true
@@ -179,6 +179,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         endBTN.setScale(0)  // Start with scale 0, for later animation
         self.addChild(endBTN)
         endBTN.run(SKAction.scale(to: 1.0, duration: 0.3)) // Make an animation for that button
+
     }
     
     
