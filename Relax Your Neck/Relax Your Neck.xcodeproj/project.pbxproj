@@ -82,7 +82,6 @@
 				3E21FB663B43DE34C09FF6BE /* Pods-Relax Your Neck.debug.xcconfig */,
 				D603D58ED279E64239EC81BF /* Pods-Relax Your Neck.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -428,6 +427,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Relax-Your-Neck-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires to access your photo library to show image on profile and send via chat";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion for pedometer data";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -465,6 +466,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Relax-Your-Neck-Info.plist";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires to access your photo library to show image on profile and send via chat";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion for pedometer data";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

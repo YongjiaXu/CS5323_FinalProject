@@ -50,10 +50,15 @@ class Application(tornado.web.Application):
         '''
 
         handlers = [(r"/[/]?", BaseHandler),
-                    (r"/Handlers[/]?",        mh.PrintHandlers),
-                    (r"/CheckDatabase[/]?",   mh.DatabaseChecker),
-                    (r"/CheckAchievement[/]?", mh.CheckAchievement),
-                    (r"/UpdateScore[/]?",    mh.UpdateScore),
+                    (r"/Handlers[/]?",          mh.PrintHandlers),
+                    (r"/CheckDatabase[/]?",     mh.DatabaseChecker),
+                    (r"/CheckAchievement[/]?",  mh.CheckAchievement),
+                    (r"/UpdateScore[/]?",       mh.UpdateScore),
+                    (r"/UpdateStep[/]?",       mh.UpdateStep),
+                    (r"/UpdateGameGoal[/]?",    mh.UpdateGameGoal),
+                    (r"/UpdateStepGoal[/]?",    mh.UpdateStepGoal),
+                    (r"/GetGameGoal[/]?",       mh.GetGameGoal),
+                    (r"/GetStepGoal[/]?",       mh.GetStepGoal),
                     ]
 
         self.handlers_string = str(handlers)
