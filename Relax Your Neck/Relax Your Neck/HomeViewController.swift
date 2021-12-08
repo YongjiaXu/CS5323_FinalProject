@@ -9,7 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController, GameViewControllerDelegate{
     
-    
+    private let serverHandler = ServerHalder()
+
     @IBOutlet weak var resultLabel: UILabel!
     
     
@@ -46,13 +47,17 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
             DispatchQueue.main.async {
                 self.resultLabel.text = "You won the game"  // Update the label
             }
+            // update the backend
+            self.serverHandler.UpdateScore(score: data, achieved: "1")
         }
         else{                   // If not reaches the goal
             ispassed = false
             DispatchQueue.main.async {
                 self.resultLabel.text = "You lost the game"
             }
+            self.serverHandler.UpdateScore(score: data, achieved: "0")
         }
+
     }
 
 }
