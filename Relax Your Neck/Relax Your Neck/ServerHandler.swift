@@ -30,7 +30,8 @@ class ServerHalder: NSObject, URLSessionDelegate {
     let operationQueue = OperationQueue()
     var retLabel = "None"
     var checkAchievementAchieved:Bool = false
-    var checkAchievementScore:Int = 0
+    var gameGoal:Int = 0
+    var stepGoal:Int = 0
 
     // convertDictionaryToData and convertDataToDictionary copied from in class assignment
     func convertDictionaryToData(with jsonUpload:NSDictionary) -> Data?{
@@ -139,9 +140,7 @@ class ServerHalder: NSObject, URLSessionDelegate {
                     let jsonDictionary = self.convertDataToDictionary(with: data)
                     // update the resultLabel
                     if let ret = jsonDictionary["ret"]{
-                        let retArr = ret as! Array<Any>
-                        self.checkAchievementAchieved = retArr[0] as! Bool
-                        self.checkAchievementScore = retArr[1] as! Int
+                        self.checkAchievementAchieved = ret as! Bool
                     }
                 }
             sem.signal()
@@ -151,11 +150,11 @@ class ServerHalder: NSObject, URLSessionDelegate {
         sem.wait()
     }
     
-    func UpdateScore(score: Int, achieved: String) {
+    func UpdateScore(score: Int) {
         let baseURL = "\(SERVER_URL)/UpdateScore"
         let postURL = URL(string: "\(baseURL)")
         var request = URLRequest(url: postURL!)
-        let jsonUpload:NSDictionary = ["score": score, "achieved": achieved]
+        let jsonUpload:NSDictionary = ["score": score]
         let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
         
         request.httpMethod = "POST"
@@ -178,6 +177,143 @@ class ServerHalder: NSObject, URLSessionDelegate {
         postTask.resume() // start the task
         sem.wait()
     }
-
+    
+    func UpdateStep(step: Int) {
+        let baseURL = "\(SERVER_URL)/UpdateStep"
+        let postURL = URL(string: "\(baseURL)")
+        var request = URLRequest(url: postURL!)
+        let jsonUpload:NSDictionary = ["step": step]
+        let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
+        
+        request.httpMethod = "POST"
+        request.httpBody = requestBody
+        let sem = DispatchSemaphore(value: 0)
+        let postTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if let res = response{
+                        print("Response:\n",res)
+                    }
+                }
+                else{
+                    print("update step successfully!")
+                    
+                }
+            sem.signal()
+        })
+        
+        postTask.resume() // start the task
+        sem.wait()
+    }
+    
+    func UpdateGameGoal(game_goal: Int) {
+        let baseURL = "\(SERVER_URL)/UpdateGameGoal"
+        let postURL = URL(string: "\(baseURL)")
+        var request = URLRequest(url: postURL!)
+        let jsonUpload:NSDictionary = ["game_goal": game_goal]
+        let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
+        
+        request.httpMethod = "POST"
+        request.httpBody = requestBody
+        let sem = DispatchSemaphore(value: 0)
+        let postTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if let res = response{
+                        print("Response:\n",res)
+                    }
+                }
+                else{
+                    print("update game_goal successfully!")
+                    
+                }
+            sem.signal()
+        })
+        postTask.resume() // start the task
+        sem.wait()
+    }
+    
+    func UpdateStepGoal(step_goal: Int) {
+        let baseURL = "\(SERVER_URL)/UpdateStepGoal"
+        let postURL = URL(string: "\(baseURL)")
+        var request = URLRequest(url: postURL!)
+        let jsonUpload:NSDictionary = ["step_goal": step_goal]
+        let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
+        
+        request.httpMethod = "POST"
+        request.httpBody = requestBody
+        let sem = DispatchSemaphore(value: 0)
+        let postTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if let res = response{
+                        print("Response:\n",res)
+                    }
+                }
+                else{
+                    print("update game_goal successfully!")
+                    
+                }
+            sem.signal()
+        })
+        postTask.resume() // start the task
+        sem.wait()
+    }
+    
+    func GetGameGoal() {
+        let baseURL = "\(SERVER_URL)/GetGameGoal"
+        let getUrl = URL(string: baseURL)
+        let request: URLRequest = URLRequest(url: getUrl!)
+        // wait for the http request to check if there is enough Data
+        let sem = DispatchSemaphore(value: 0)
+        let dataTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if(response != nil) {
+                        print("Response:\n%@",response!)
+                    } else {
+                        print("no response")
+                    }
+                }
+                else{
+                    let jsonDictionary = self.convertDataToDictionary(with: data)
+                    // update the resultLabel
+                    if let ret = jsonDictionary["ret"]{
+                        self.gameGoal = ret as! Int
+                    }
+                }
+            sem.signal()
+        })
+        dataTask.resume() // start the task
+        sem.wait()
+    }
+    
+    func GetStepGoal() {
+        let baseURL = "\(SERVER_URL)/GetStepGoal"
+        let getUrl = URL(string: baseURL)
+        let request: URLRequest = URLRequest(url: getUrl!)
+        // wait for the http request to check if there is enough Data
+        let sem = DispatchSemaphore(value: 0)
+        let dataTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if(response != nil) {
+                        print("Response:\n%@",response!)
+                    } else {
+                        print("no response")
+                    }
+                }
+                else{
+                    let jsonDictionary = self.convertDataToDictionary(with: data)
+                    // update the resultLabel
+                    if let ret = jsonDictionary["ret"]{
+                        self.stepGoal = ret as! Int
+                    }
+                }
+            sem.signal()
+        })
+        dataTask.resume() // start the task
+        sem.wait()
+    }
 }
 

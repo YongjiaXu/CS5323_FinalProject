@@ -91,21 +91,101 @@
                                     <constraint firstAttribute="height" constant="252" id="UOg-Af-N1D"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Game Goal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JLC-7H-aKA">
+                                <rect key="frame" x="20" y="477" width="126" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="126" id="pBQ-Ln-gaW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Step Goal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9zx-2e-TLX">
+                                <rect key="frame" x="20" y="516" width="116" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="116" id="BeL-94-ZyN"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XHj-jG-4tI">
+                                <rect key="frame" x="159" y="470" width="97" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="73m-hD-pwE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="chooseGameGoal:" destination="Jo1-Ar-4IW" eventType="editingDidEnd" id="a0l-hE-eqd"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EkS-EA-8c9">
+                                <rect key="frame" x="301" y="473" width="75" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="M2c-i3-8Cr"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reset"/>
+                                <connections>
+                                    <action selector="resetGameGoal:" destination="Jo1-Ar-4IW" eventType="touchUpInside" id="QdT-tL-bNs"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-Ts-wEB">
+                                <rect key="frame" x="159" y="512" width="97" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="C5U-T9-VB3"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                <connections>
+                                    <action selector="chooseStepGoal:" destination="Jo1-Ar-4IW" eventType="editingDidEnd" id="a7j-qG-gB0"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1mL-cI-GlE">
+                                <rect key="frame" x="301" y="516" width="75" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="y8G-Tm-rQm"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Reset"/>
+                                <connections>
+                                    <action selector="resetStepGoal:" destination="Jo1-Ar-4IW" eventType="touchUpInside" id="1Zv-iS-AD1"/>
+                                    <action selector="stepGoalResetBtn:" destination="Jo1-Ar-4IW" eventType="touchUpInside" id="8XW-8X-OP0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tad-iB-JCD"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="9zx-2e-TLX" firstAttribute="leading" secondItem="tad-iB-JCD" secondAttribute="leading" constant="20" id="4ZU-F7-LlQ"/>
+                            <constraint firstItem="tad-iB-JCD" firstAttribute="trailing" secondItem="EkS-EA-8c9" secondAttribute="trailing" constant="38" id="CDx-iR-M96"/>
+                            <constraint firstItem="XHj-jG-4tI" firstAttribute="leading" secondItem="JLC-7H-aKA" secondAttribute="trailing" constant="13" id="JiP-FO-UTk"/>
+                            <constraint firstItem="9zx-2e-TLX" firstAttribute="top" secondItem="JLC-7H-aKA" secondAttribute="bottom" constant="18" id="MBB-D1-6DJ"/>
+                            <constraint firstItem="tad-iB-JCD" firstAttribute="bottom" secondItem="9zx-2e-TLX" secondAttribute="bottom" constant="325" id="Pqb-vR-Xqs"/>
                             <constraint firstItem="sQQ-g0-eyk" firstAttribute="top" secondItem="tad-iB-JCD" secondAttribute="top" id="SzA-ji-2yg"/>
+                            <constraint firstItem="1mL-cI-GlE" firstAttribute="top" secondItem="EkS-EA-8c9" secondAttribute="bottom" constant="12" id="aV4-fS-mey"/>
+                            <constraint firstItem="tad-iB-JCD" firstAttribute="bottom" secondItem="TOz-Ts-wEB" secondAttribute="bottom" constant="316" id="afh-T4-g1n"/>
+                            <constraint firstItem="TOz-Ts-wEB" firstAttribute="leading" secondItem="9zx-2e-TLX" secondAttribute="trailing" constant="23" id="gJs-52-rWT"/>
                             <constraint firstItem="tad-iB-JCD" firstAttribute="trailing" secondItem="sQQ-g0-eyk" secondAttribute="trailing" constant="20" id="hNl-8K-fdR"/>
+                            <constraint firstItem="TOz-Ts-wEB" firstAttribute="top" secondItem="XHj-jG-4tI" secondAttribute="bottom" constant="8" symbolic="YES" id="het-Tw-0gH"/>
+                            <constraint firstItem="tad-iB-JCD" firstAttribute="bottom" secondItem="1mL-cI-GlE" secondAttribute="bottom" constant="315" id="hf4-eW-dIK"/>
                             <constraint firstItem="sQQ-g0-eyk" firstAttribute="leading" secondItem="tad-iB-JCD" secondAttribute="leading" constant="20" id="neK-IX-8nc"/>
+                            <constraint firstItem="tad-iB-JCD" firstAttribute="trailing" secondItem="1mL-cI-GlE" secondAttribute="trailing" constant="38" id="uZQ-6F-vNg"/>
+                            <constraint firstItem="JLC-7H-aKA" firstAttribute="leading" secondItem="tad-iB-JCD" secondAttribute="leading" constant="20" id="z19-YG-j3s"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fxd-Fq-GlM"/>
                     <connections>
                         <outlet property="calendar" destination="sQQ-g0-eyk" id="zkN-Qm-gM7"/>
+                        <outlet property="gameGoalResetBtn" destination="EkS-EA-8c9" id="Zaw-vG-EVb"/>
+                        <outlet property="gameGoalTF" destination="XHj-jG-4tI" id="Spv-0x-bFA"/>
+                        <outlet property="stepGoalTF" destination="TOz-Ts-wEB" id="i0a-c9-eea"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YVI-bB-7N3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="PZy-2y-9tS"/>
             </objects>
             <point key="canvasLocation" x="60.869565217391312" y="-648.21428571428567"/>
         </scene>

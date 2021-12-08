@@ -41,32 +41,111 @@ class CheckAchievement(BaseHandler):
         day = inputData['day']
         entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
         if entry:
-            ret = [entry['achieved'], entry['highest_score']]
-            self.write_json({'ret': ret})
+            score = entry['highest_score']
+            game_goal = entry['game_goal']
+            step = entry['step']
+            step_goal = entry['step_goal']
+            print('Score: {} Game_goal: {} Step: {} Step_goal: {}'.format(score, game_goal, step, step_goal))
+            if score >= game_goal or step >= step_goal:
+                self.write_json({'ret': True})
+            else:
+                self.write_json({'ret': False})
         else:
-            ret = [False, 0]
-            self.write_json({'ret': ret})
+            self.write_json({'ret': False})
 
 class UpdateScore(BaseHandler):
     def post(self):
         inputData = json.loads(self.request.body.decode("utf-8"))
         score = int(inputData['score'])
-        achieved = True if inputData['achieved'] == '1' else False
         year = datetime.now().year
         month = datetime.now().month
         day = datetime.now().day
         entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
         if entry:
             # if the user already played today 
-            if entry['achieved'] == False and achieved == True:
-                # check if achieve needs to be updated
-                self.db.calendar.update_one({'year': int(year), 'month': int(month), 'day': int(day)}, {'$set': {'achieved': True}})
             if score > entry['highest_score']:
                 # if the score is higher, update the score
                 self.db.calendar.update_one({'year': int(year), 'month': int(month), 'day': int(day)}, {'$set': {'highest_score': score}})
         else:
-            self.db.calendar.insert_one({'year': int(year), 'month': int(month), 'day': int(day), 'highest_score': score, 'achieved': achieved})
+            ret = self.db.user.find_one({'step_goal': {'$exists': True}, 'game_goal': {'$exists': True}})
+            step_goal = ret['step_goal']
+            game_goal = ret['game_goal']
+            self.db.calendar.insert_one({'year': int(year), 'month': int(month), 'day': int(day), 'highest_score': score, 'step_goal': step_goal, 'game_goal': game_goal})
             entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
             print('adding new score')
             print(entry)
+
+class UpdateStep(BaseHandler):
+    def post(self):
+        inputData = json.loads(self.request.body.decode("utf-8"))
+        step = int(inputData['step'])
+        year = datetime.now().year
+        month = datetime.now().month
+        day = datetime.now().day
+        entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+        if entry:
+            # steps only increase; read from pedometer
+            self.db.calendar.update_one({'year': int(year), 'month': int(month), 'day': int(day)}, {'$set': {'step': step}})
+        else:
+            # insert new entry
+            # get previous step_goal and game_goal
+            ret = self.db.user.find_one({'step_goal': {'$exists': True}, 'game_goal': {'$exists': True}})
+            step_goal = ret['step_goal']
+            game_goal = ret['game_goal']
+            self.db.calendar.insert_one({'year': int(year), 'month': int(month), 'day': int(day), 'step': step, 'step_goal': step_goal, 'highest_score': 0, 'game_goal': game_goal})
+            entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+            print('adding new step')
+            print(entry)
+
+class UpdateGameGoal(BaseHandler):
+    def post(self):
+        inputData = json.loads(self.request.body.decode("utf-8"))
+        game_goal = int(inputData['game_goal'])
+        year = datetime.now().year
+        month = datetime.now().month
+        day = datetime.now().day
+        entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+        if entry: 
+            self.db.calendar.update_one({'year': int(year), 'month': int(month), 'day': int(day)}, {'$set': {'game_goal': game_goal}})
+        else: 
+            self.db.calendar.insert_one({'year': int(year), 'month': int(month), 'day': int(day), 'game_goal': game_goal})
+            entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+            print('updating new game_goal')
+            print(entry)
+        try:
+            self.db.user.update_many({}, {'$set': {'game_goal': game_goal}})
+        except:
+            self.db.user.insert_one({'game_goal': game_goal, 'step_goal': 0})
+
+class UpdateStepGoal(BaseHandler):
+    def post(self):
+        inputData = json.loads(self.request.body.decode("utf-8"))
+        step_goal = int(inputData['step_goal'])
+        year = datetime.now().year
+        month = datetime.now().month
+        day = datetime.now().day
+        entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+        if entry: 
+            self.db.calendar.update_one({'year': int(year), 'month': int(month), 'day': int(day)}, {'$set': {'step_goal': step_goal}})
+        else: 
+            self.db.calendar.insert_one({'year': int(year), 'month': int(month), 'day': int(day), 'step_goal': step_goal})
+            entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+            print('updating new step_goal')
+            print(entry)
+        try:
+            self.db.user.update_many({}, {'$set': {'step_goal': step_goal}})
+        except:
+            self.db.user.insert_one({'game_goal': 0, 'step_goal': step_goal})
+
+class GetGameGoal(BaseHandler):
+    def get(self):
+        ret = self.db.user.find_one({'game_goal': {'$exists': True}})
+        if ret:
+            self.write_json({'ret': ret['game_goal']})
+
+class GetStepGoal(BaseHandler):
+    def get(self):
+        ret = self.db.user.find_one({'step_goal': {'$exists': True}})
+        if ret:
+            self.write_json({'ret': ret['step_goal']})
 
