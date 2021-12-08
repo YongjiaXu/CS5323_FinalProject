@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		196875D089C3267E5B694891 /* Pods_Relax_Your_Neck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F707C8A05C34FCB1F88F570 /* Pods_Relax_Your_Neck.framework */; };
+		C266A75F275F1ABB008BA08C /* ServerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266A75E275F1ABB008BA08C /* ServerHandler.swift */; };
+		C266A763275F2533008BA08C /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266A762275F2533008BA08C /* UserViewController.swift */; };
 		CC1FDF512751AAF2000D1D99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */; };
 		CC1FDF532751AAF2000D1D99 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF522751AAF2000D1D99 /* GameScene.sks */; };
 		CC1FDF552751AAF2000D1D99 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF542751AAF2000D1D99 /* Actions.sks */; };
@@ -25,6 +28,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F707C8A05C34FCB1F88F570 /* Pods_Relax_Your_Neck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Relax_Your_Neck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E21FB663B43DE34C09FF6BE /* Pods-Relax Your Neck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Relax Your Neck.debug.xcconfig"; path = "Target Support Files/Pods-Relax Your Neck/Pods-Relax Your Neck.debug.xcconfig"; sourceTree = "<group>"; };
+		C266A75E275F1ABB008BA08C /* ServerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHandler.swift; sourceTree = "<group>"; };
+		C266A762275F2533008BA08C /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		CC1FDF4D2751AAF2000D1D99 /* Relax Your Neck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Relax Your Neck.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC1FDF522751AAF2000D1D99 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -45,6 +52,7 @@
 		CC1FDF82275E8B9F000D1D99 /* Relax-Your-Neck-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Relax-Your-Neck-Bridging-Header.h"; sourceTree = "<group>"; };
 		CC1FDF83275E8DB4000D1D99 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
 		CC1FDF85275E936C000D1D99 /* nose.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = nose.xml; sourceTree = "<group>"; };
+		D603D58ED279E64239EC81BF /* Pods-Relax Your Neck.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Relax Your Neck.release.xcconfig"; path = "Target Support Files/Pods-Relax Your Neck/Pods-Relax Your Neck.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +61,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC1FDF84275E8DB4000D1D99 /* opencv2.framework in Frameworks */,
+				196875D089C3267E5B694891 /* Pods_Relax_Your_Neck.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0775282E234604E64AC3CC2D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2F707C8A05C34FCB1F88F570 /* Pods_Relax_Your_Neck.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		776B58B8A292E769D432CB5E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3E21FB663B43DE34C09FF6BE /* Pods-Relax Your Neck.debug.xcconfig */,
+				D603D58ED279E64239EC81BF /* Pods-Relax Your Neck.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		CC1FDF442751AAF2000D1D99 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +93,8 @@
 				CC1FDF6E275E7D30000D1D99 /* ImageDSPUtils */,
 				CC1FDF4F2751AAF2000D1D99 /* Relax Your Neck */,
 				CC1FDF4E2751AAF2000D1D99 /* Products */,
+				776B58B8A292E769D432CB5E /* Pods */,
+				0775282E234604E64AC3CC2D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -90,6 +119,8 @@
 				CC1FDF672752F049000D1D99 /* RandomFunc.swift */,
 				CC1FDF582751AAF2000D1D99 /* GameViewController.swift */,
 				CC1FDF5A2751AAF2000D1D99 /* Main.storyboard */,
+				C266A762275F2533008BA08C /* UserViewController.swift */,
+				C266A75E275F1ABB008BA08C /* ServerHandler.swift */,
 				CC1FDF6927530128000D1D99 /* HomeViewController.swift */,
 				CC1FDF5D2751AAF6000D1D99 /* Assets.xcassets */,
 				CC1FDF85275E936C000D1D99 /* nose.xml */,
@@ -116,9 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CC1FDF642751AAF6000D1D99 /* Build configuration list for PBXNativeTarget "Relax Your Neck" */;
 			buildPhases = (
+				C59EAC8D6A06379E847030BD /* [CP] Check Pods Manifest.lock */,
 				CC1FDF492751AAF2000D1D99 /* Sources */,
 				CC1FDF4A2751AAF2000D1D99 /* Frameworks */,
 				CC1FDF4B2751AAF2000D1D99 /* Resources */,
+				53BE9625234EF445984064CA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -179,14 +212,58 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		53BE9625234EF445984064CA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Relax Your Neck/Pods-Relax Your Neck-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Relax Your Neck/Pods-Relax Your Neck-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Relax Your Neck/Pods-Relax Your Neck-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C59EAC8D6A06379E847030BD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Relax Your Neck-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CC1FDF492751AAF2000D1D99 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				CC1FDF6A27530128000D1D99 /* HomeViewController.swift in Sources */,
+				C266A763275F2533008BA08C /* UserViewController.swift in Sources */,
 				CC1FDF76275E7D31000D1D99 /* VideoAnalgesic.swift in Sources */,
 				CC1FDF682752F049000D1D99 /* RandomFunc.swift in Sources */,
+				C266A75F275F1ABB008BA08C /* ServerHandler.swift in Sources */,
 				CC1FDF572751AAF2000D1D99 /* GameScene.swift in Sources */,
 				CC1FDF74275E7D31000D1D99 /* OpenCVBridge.mm in Sources */,
 				CC1FDF592751AAF2000D1D99 /* GameViewController.swift in Sources */,
@@ -336,12 +413,13 @@
 		};
 		CC1FDF652751AAF6000D1D99 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E21FB663B43DE34C09FF6BE /* Pods-Relax Your Neck.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F69WJ27LN4;
+				DEVELOPMENT_TEAM = 8Q3MAQ3CMN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -372,12 +450,13 @@
 		};
 		CC1FDF662751AAF6000D1D99 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D603D58ED279E64239EC81BF /* Pods-Relax Your Neck.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F69WJ27LN4;
+				DEVELOPMENT_TEAM = 8Q3MAQ3CMN;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
