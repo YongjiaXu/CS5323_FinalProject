@@ -14,9 +14,11 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
 //    let activityManager = CMMotionActivityManager()
     let pedometer = CMPedometer()
     var stepsWalked = 0
-
+    @IBOutlet weak var playBtn: UIButton!
+    
     @IBOutlet weak var resultLabel: UILabel!
     
+    @IBOutlet weak var playLabel: UILabel!
     
     @IBAction func playGame(_ sender: UIButton) {
     }
@@ -32,6 +34,17 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
 
         // Do any additional setup after loading the view.
         updatePedometer()
+        playBtnInit()
+        resultLabel.font = UIFont(name: "04b_19", size: 30)
+        playLabel.font = UIFont(name: "04b_19", size: 30)
+    }
+    
+    func playBtnInit() {
+        playBtn.layer.masksToBounds = true
+        playBtn.layer.cornerRadius = 3
+        playBtn.titleLabel?.minimumScaleFactor = 0.5
+        playBtn.titleLabel?.numberOfLines = 0
+        playBtn.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
     func updatePedometer(){
@@ -63,20 +76,17 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
         // get game goal from the server
         serverHandler.GetGameGoal()
         scoregoal = serverHandler.gameGoal
+        DispatchQueue.main.async {
+            self.resultLabel.text = "Score: \(data)"
+        }
         // Catch the result from the game
         if(data >= scoregoal){      // If reaches the goal
             ispassed = true
-            DispatchQueue.main.async {
-                self.resultLabel.text = "You won the game"  // Update the label
-            }
             // update the backend
             self.serverHandler.UpdateScore(score: data)
         }
         else{                   // If not reaches the goal
             ispassed = false
-            DispatchQueue.main.async {
-                self.resultLabel.text = "You lost the game"
-            }
             self.serverHandler.UpdateScore(score: data)
         }
 
