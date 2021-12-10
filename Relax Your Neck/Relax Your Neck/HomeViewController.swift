@@ -44,8 +44,8 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
         resultLabel.font = UIFont(name: "04b_19", size: 30)
         playLabel.font = UIFont(name: "04b_19", size: 30)
         myPageLabel.font = UIFont(name: "04b_19", size: 30)
-        runRunLabel.font = UIFont(name: "04b_19", size: 30)
-        mustangLabel.font = UIFont(name: "04b_19", size: 60)
+        runRunLabel.font = UIFont(name: "04b_19", size: 25)
+        mustangLabel.font = UIFont(name: "04b_19", size: 45)
     }
     
     func myPageBtnInit() {
