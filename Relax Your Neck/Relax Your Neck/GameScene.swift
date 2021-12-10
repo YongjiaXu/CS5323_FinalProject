@@ -311,7 +311,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         wallPair.addChild(btmWall)
         
         // The location of those two walls should be random
-        let randomPosition = CGFloat.random(min: -200, max: 100)
+        let randomPosition = CGFloat.random(min: -150, max: 100)
         wallPair.position.y = wallPair.position.y + randomPosition
         wallPair.addChild(scoreNode)
         
