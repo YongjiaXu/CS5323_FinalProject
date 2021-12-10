@@ -7,5 +7,5 @@ target 'Relax Your Neck' do
 
   # Pods for Relax Your Neck
 pod 'FSCalendar'
-
+pod 'SPConfetti'
 end

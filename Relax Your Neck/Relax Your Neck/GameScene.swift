@@ -36,6 +36,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var moveAndRemove = SKAction()  // An action for wall pair
     var score = Int()                   // The score that user get
     let scoreLbl = SKLabelNode()        // A label for presenting the score
+    let sitUpLbl = SKLabelNode()
+    let moveHeadLbl = SKLabelNode()
+    let tapBeginLbl = SKLabelNode()
     var endBTN = SKSpriteNode()         // The game over buttom/label
     var pausedBTN = SKLabelNode()           // The pause button/label
     var gameStatus = String()
@@ -76,11 +79,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         
         // Set the Score Label
         scoreLbl.position = CGPoint(x: 0, y: 0+self.frame.height/3.5)
-        scoreLbl.text = "\(score)"
+//        scoreLbl.text = "test"
         scoreLbl.zPosition = 4
         scoreLbl.fontName = "04b_19"
         scoreLbl.fontSize = 60
         self.addChild(scoreLbl)
+
+        // Set the sitUp Label
+        sitUpLbl.position = CGPoint(x: 0, y: 0+self.frame.height/3.5)
+        sitUpLbl.text = "Sit up Straight"
+        sitUpLbl.zPosition = 4
+        sitUpLbl.fontName = "04b_19"
+        sitUpLbl.fontSize = 40
+        self.addChild(sitUpLbl)
+        
+        // Set the move head Label
+        moveHeadLbl.position = CGPoint(x: 0, y: 0+self.frame.height/4.5)
+        moveHeadLbl.text = "Move your head up and down"
+        moveHeadLbl.zPosition = 4
+        moveHeadLbl.fontName = "04b_19"
+        moveHeadLbl.fontSize = 25
+        self.addChild(moveHeadLbl)
+      
+        // Set the move head Label
+        tapBeginLbl.position = CGPoint(x: 0, y: Ground.frame.height/2-self.frame.height/3)
+        tapBeginLbl.text = "(Tap To Begin)"
+        tapBeginLbl.zPosition = 4
+        tapBeginLbl.fontName = "04b_19"
+        tapBeginLbl.fontSize = 40
+        self.addChild(tapBeginLbl)
         
         // Set the Ground
         Ground = SKSpriteNode(imageNamed: "Ground")
@@ -232,6 +259,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
             let location = touch.location(in: self) // Find the location of that touch
             if gameStatus == "notstart" {   // If it is the first touch
                 gameStatus = "start"        // Wake the game up
+                scoreLbl.text = "\(score)"
+                sitUpLbl.text = " "
+                moveHeadLbl.text = " "
+                tapBeginLbl.text = " "
                 let spawn = SKAction.run({
                     () in
                     self.createWalls()      // Create walls and let them move

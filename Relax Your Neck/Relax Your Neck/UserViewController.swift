@@ -7,7 +7,7 @@
 
 import UIKit
 import FSCalendar // referenced: https://www.youtube.com/watch?v=5Jwlet8L84w&t=382s
-
+import SPConfetti
 class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDelegate {
 //    private let serverHandler = ServerHalder() - switched to UserDefaults
     let defaults = UserDefaults.standard
@@ -146,6 +146,7 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
 //                self.stepOfTheDayNumLabel.text = "\(self.serverHandler.stepOfTheDay)"
 //                self.scoreOfTheDayNumLabel.text = "\(self.serverHandler.scoreOfTheDay)"
             }
+            SPConfetti.startAnimating(.centerWidthToDown, particles: [.star, .arc], duration: 1)
         } else if (achieved == 0) {
             achieve_str = "Daily Goal Not Achieved."
 //            serverHandler.GetStepOfTheDay(year: year, month: month, day: day)
