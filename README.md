@@ -8,6 +8,7 @@
 - Need to start from local computer 
 - `python db_main.py`
 - Change IP SERVER_URL in ServerHandler.swift
+  - `ifconfig | grep inet` to find your IP
 
 ## SceneKit
 
