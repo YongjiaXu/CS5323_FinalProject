@@ -29,10 +29,12 @@ class ServerHalder: NSObject, URLSessionDelegate {
     
     let operationQueue = OperationQueue()
     var retLabel = "None"
-    var checkAchievementAchieved:Bool = false
+    var checkAchievementAchieved:Int = 0
     var gameGoal:Int = 0
     var stepGoal:Int = 0
-
+    var highestScoreEver:Int = 0
+    var scoreOfTheDay:Int = 0
+    var stepOfTheDay:Int = 0
     // convertDictionaryToData and convertDataToDictionary copied from in class assignment
     func convertDictionaryToData(with jsonUpload:NSDictionary) -> Data?{
         do { // try to make JSON and deal with errors using do/catch block
@@ -140,7 +142,7 @@ class ServerHalder: NSObject, URLSessionDelegate {
                     let jsonDictionary = self.convertDataToDictionary(with: data)
                     // update the resultLabel
                     if let ret = jsonDictionary["ret"]{
-                        self.checkAchievementAchieved = ret as! Bool
+                        self.checkAchievementAchieved = ret as! Int
                     }
                 }
             sem.signal()
@@ -313,6 +315,96 @@ class ServerHalder: NSObject, URLSessionDelegate {
             sem.signal()
         })
         dataTask.resume() // start the task
+        sem.wait()
+    }
+    
+    func GetHighestScore() {
+        let baseURL = "\(SERVER_URL)/GetHighestScore"
+        let getUrl = URL(string: baseURL)
+        let request: URLRequest = URLRequest(url: getUrl!)
+        // wait for the http request to check if there is enough Data
+        let sem = DispatchSemaphore(value: 0)
+        let dataTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if(response != nil) {
+                        print("Response:\n%@",response!)
+                    } else {
+                        print("no response")
+                    }
+                }
+                else{
+                    let jsonDictionary = self.convertDataToDictionary(with: data)
+                    // update the resultLabel
+                    if let ret = jsonDictionary["ret"]{
+                        self.highestScoreEver = ret as! Int
+                    }
+                }
+            sem.signal()
+        })
+        dataTask.resume() // start the task
+        sem.wait()
+    }
+    
+    func GetScoreOfTheDay(year: Int, month: Int, day: Int) {
+        let baseURL = "\(SERVER_URL)/GetScoreOfTheDay"
+        let postURL = URL(string: "\(baseURL)")
+        var request = URLRequest(url: postURL!)
+        let jsonUpload:NSDictionary = ["year": year, "month": month, "day": day]
+        let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
+        
+        request.httpMethod = "POST"
+        request.httpBody = requestBody
+        let sem = DispatchSemaphore(value: 0)
+        let postTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if let res = response{
+                        print("Response:\n",res)
+                    }
+                }
+                else{
+                    let jsonDictionary = self.convertDataToDictionary(with: data)
+                    // update the resultLabel
+                    if let ret = jsonDictionary["ret"]{
+                        self.scoreOfTheDay = ret as! Int
+                    }
+                }
+            sem.signal()
+        })
+        
+        postTask.resume() // start the task
+        sem.wait()
+    }
+    
+    func GetStepOfTheDay(year: Int, month: Int, day: Int) {
+        let baseURL = "\(SERVER_URL)/GetStepOfTheDay"
+        let postURL = URL(string: "\(baseURL)")
+        var request = URLRequest(url: postURL!)
+        let jsonUpload:NSDictionary = ["year": year, "month": month, "day": day]
+        let requestBody:Data? = self.convertDictionaryToData(with:jsonUpload)
+        
+        request.httpMethod = "POST"
+        request.httpBody = requestBody
+        let sem = DispatchSemaphore(value: 0)
+        let postTask : URLSessionDataTask = self.session.dataTask(with: request,
+            completionHandler:{(data, response, error) in
+                if(error != nil){
+                    if let res = response{
+                        print("Response:\n",res)
+                    }
+                }
+                else{
+                    let jsonDictionary = self.convertDataToDictionary(with: data)
+                    // update the resultLabel
+                    if let ret = jsonDictionary["ret"]{
+                        self.stepOfTheDay = ret as! Int
+                    }
+                }
+            sem.signal()
+        })
+        
+        postTask.resume() // start the task
         sem.wait()
     }
 }

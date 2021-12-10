@@ -59,6 +59,9 @@ class Application(tornado.web.Application):
                     (r"/UpdateStepGoal[/]?",    mh.UpdateStepGoal),
                     (r"/GetGameGoal[/]?",       mh.GetGameGoal),
                     (r"/GetStepGoal[/]?",       mh.GetStepGoal),
+                    (r"/GetHighestScore[/]?",       mh.GetHighestScore),
+                    (r"/GetScoreOfTheDay[/]?",       mh.GetScoreOfTheDay),
+                    (r"/GetStepOfTheDay[/]?",       mh.GetStepOfTheDay),
                     ]
 
         self.handlers_string = str(handlers)

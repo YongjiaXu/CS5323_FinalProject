@@ -120,6 +120,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
         self.videoManager.setProcessingBlock(newProcessBlock: self.processImageSwift)
         
         if !videoManager.isRunning{
+            self.videoManager.setFPS(desiredFrameRate: 60)
             videoManager.start()        // Start the videoManager
         }
     }
