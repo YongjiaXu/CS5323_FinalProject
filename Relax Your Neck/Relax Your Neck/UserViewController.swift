@@ -7,14 +7,13 @@
 
 import UIKit
 import FSCalendar // referenced: https://www.youtube.com/watch?v=5Jwlet8L84w&t=382s
-import CoreMotion
 
 class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDelegate {
-    private let serverHandler = ServerHalder()
-    let pedometer = CMPedometer()
-    var stepsWalked = 0
-    var stepGoal = 0
-    var gameGoal = 0
+//    private let serverHandler = ServerHalder() - switched to UserDefaults
+    let defaults = UserDefaults.standard
+    var stepOfTheDay = 0
+    var scoreOfTheDay = 0
+
     let months = ["January", "Feburary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     @IBOutlet weak var selectedDataLabel: UILabel!
     @IBOutlet weak var dailyGameGoalLabel: UILabel!
@@ -31,11 +30,44 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+       
         calendar.delegate = self
         textFieldsInit()
         calendarUIInit()
         dashboardInit()
         labelsInit()
+        resetBtnInit()
+    }
+    
+    func resetBtnInit() {
+        gameGoalResetBtn.addTarget(self, action: #selector(startHighlightGameGoal), for: .touchDown)
+        gameGoalResetBtn.addTarget(self, action: #selector(stopHighlightGameGoal), for: .touchUpInside)
+        gameGoalResetBtn.addTarget(self, action: #selector(stopHighlightGameGoal), for: .touchUpOutside)
+        stepGoalResetBtn.addTarget(self, action: #selector(startHighlightStepGoal), for: .touchDown)
+        stepGoalResetBtn.addTarget(self, action: #selector(stopHighlightStepGoal), for: .touchUpInside)
+        stepGoalResetBtn.addTarget(self, action: #selector(stopHighlightStepGoal), for: .touchUpOutside)
+    }
+    
+    @objc func startHighlightGameGoal(sender: UIButton) {
+        gameGoalResetBtn.layer.borderColor = UIColor(rgb: 0xC8102E).cgColor
+        gameGoalResetBtn.layer.borderWidth = 3
+        gameGoalResetBtn.layer.masksToBounds = true
+    }
+    @objc func stopHighlightGameGoal(sender: UIButton) {
+        gameGoalResetBtn.layer.borderColor = UIColor(rgb: 0x2B2C2C).cgColor
+        gameGoalResetBtn.layer.borderWidth = 0
+    }
+    
+    @objc func startHighlightStepGoal(sender: UIButton) {
+        stepGoalResetBtn.layer.borderColor = UIColor(rgb: 0xC8102E).cgColor
+        stepGoalResetBtn.layer.borderWidth = 3
+        stepGoalResetBtn.layer.masksToBounds = true
+    }
+    @objc func stopHighlightStepGoal(sender: UIButton) {
+        stepGoalResetBtn.layer.borderColor = UIColor(rgb: 0x2B2C2C).cgColor
+        stepGoalResetBtn.layer.borderWidth = 0
     }
     
     func dashboardInit() {
@@ -50,7 +82,7 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         formatter.dateFormat = "dd"
         let day = Int(formatter.string(from: today))!
         selectedDataLabel.text = "\(months[month-1]) \(day) \(year)"
-        serverHandler.CheckAchievement(year: year, month: month, day: day)
+//        serverHandler.CheckAchievement(year: year, month: month, day: day)
         self.updateAchieveStatus(year: year, month: month, day: day)
     }
     
@@ -58,23 +90,6 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         calendar.appearance.headerTitleFont = UIFont(name: "04b_19", size: 23)
         calendar.appearance.weekdayFont = UIFont(name: "04b_19", size: 16)
         calendar.appearance.titleFont = UIFont(name: "04b_19", size: 18)
-    }
-    
-    func updatePedometer(){
-        let sem = DispatchSemaphore(value: 0)
-        serverHandler.GetStepGoal()
-        self.stepGoal = self.serverHandler.stepGoal
-        if CMPedometer.isStepCountingAvailable(){
-            let startToday = Calendar.current.startOfDay(for: Date())
-            pedometer.queryPedometerData(from: startToday, to: Date())
-            {(pedData:CMPedometerData?, error:Error?)->Void in
-                if let data = pedData {
-                    self.stepsWalked = data.numberOfSteps.intValue
-                }
-                sem.signal()
-            }
-        }
-        sem.wait()
     }
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -87,37 +102,67 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         let day = Int(formatter.string(from: date))!
         print("\(year) \(month) \(day)")
         selectedDataLabel.text = "\(months[month-1]) \(day) \(year)"
-        serverHandler.CheckAchievement(year: year, month: month, day: day)
+        
+//        serverHandler.CheckAchievement(year: year, month: month, day: day)
         self.updateAchieveStatus(year: year, month: month, day: day)
     }
     
+    func checkAchieved(year: Int, month: Int, day: Int) -> Int{
+        let date = "\(year)-\(month)-\(day)"
+        let gameGoalKey = "\(date)-gameGoal"
+        let stepGoalKey = "\(date)-stepGoal"
+        let scoreKey = "\(date)-score"
+        let stepKey = "\(date)-step"
+        
+        if (!isKeyPresentInUserDefaults(key: gameGoalKey) || !isKeyPresentInUserDefaults(key: stepGoalKey) ||
+            !isKeyPresentInUserDefaults(key: scoreKey) || !isKeyPresentInUserDefaults(key: stepKey)) {
+            return 2
+        }
+        
+        let gameGoal = defaults.integer(forKey: gameGoalKey)
+        let stepGoal = defaults.integer(forKey: stepGoalKey)
+        scoreOfTheDay = defaults.integer(forKey: scoreKey)
+        stepOfTheDay = defaults.integer(forKey: stepKey)
+        if (stepOfTheDay > stepGoal || scoreOfTheDay >= gameGoal) {
+            return 1
+        } else {
+            return 0
+        }
+    }
+    
     func updateAchieveStatus(year: Int, month: Int, day: Int) {
-        let achieved = serverHandler.checkAchievementAchieved
-//        // ****** also need to check the pedometer value
+        let achieved = checkAchieved(year: year, month: month, day: day)
         var achieve_str = ""
         if (achieved == 1) {
             achieve_str = "Daily Goal Achieved!"
-            serverHandler.GetStepOfTheDay(year: year, month: month, day: day)
-            serverHandler.GetScoreOfTheDay(year: year, month: month, day: day)
+//            serverHandler.GetStepOfTheDay(year: year, month: month, day: day)
+//            serverHandler.GetScoreOfTheDay(year: year, month: month, day: day)
             DispatchQueue.main.async {
                 self.stepOfTheDayLabel.text = "Step of the day"
                 self.scoreOfTheDayLabel.text = "Score of the day"
-                self.stepOfTheDayNumLabel.text = "\(self.serverHandler.stepOfTheDay)"
-                self.scoreOfTheDayNumLabel.text = "\(self.serverHandler.scoreOfTheDay)"
+                self.stepOfTheDayNumLabel.text = "\(self.stepOfTheDay)"
+                self.scoreOfTheDayNumLabel.text = "\(self.scoreOfTheDay)"
+                self.achieveStrLabel.textColor = UIColor.systemYellow
+//                self.stepOfTheDayNumLabel.text = "\(self.serverHandler.stepOfTheDay)"
+//                self.scoreOfTheDayNumLabel.text = "\(self.serverHandler.scoreOfTheDay)"
             }
         } else if (achieved == 0) {
             achieve_str = "Daily Goal Not Achieved."
-            serverHandler.GetStepOfTheDay(year: year, month: month, day: day)
-            serverHandler.GetScoreOfTheDay(year: year, month: month, day: day)
+//            serverHandler.GetStepOfTheDay(year: year, month: month, day: day)
+//            serverHandler.GetScoreOfTheDay(year: year, month: month, day: day)
             DispatchQueue.main.async {
                 self.stepOfTheDayLabel.text = "Step of the day"
                 self.scoreOfTheDayLabel.text = "Score of the day"
-                self.stepOfTheDayNumLabel.text = "\(self.serverHandler.stepOfTheDay)"
-                self.scoreOfTheDayNumLabel.text = "\(self.serverHandler.scoreOfTheDay)"
+                self.stepOfTheDayNumLabel.text = "\(self.stepOfTheDay)"
+                self.scoreOfTheDayNumLabel.text = "\(self.scoreOfTheDay)"
+                self.achieveStrLabel.textColor = UIColor.gray
+//                self.stepOfTheDayNumLabel.text = "\(self.serverHandler.stepOfTheDay)"
+//                self.scoreOfTheDayNumLabel.text = "\(self.serverHandler.scoreOfTheDay)"
             }
         } else {
             achieve_str = "No Check-In Record."
             DispatchQueue.main.async {
+                self.achieveStrLabel.textColor = UIColor.gray
                 self.stepOfTheDayLabel.text = " "
                 self.scoreOfTheDayLabel.text = " "
                 self.stepOfTheDayNumLabel.text = " "
@@ -143,14 +188,18 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         gameGoalTF.delegate = self
         stepGoalTF.font = UIFont(name: "04b_19", size: 18)
         gameGoalTF.font = UIFont(name: "04b_19", size: 18)
-        // get gameGoal and stepGoal
-        serverHandler.GetGameGoal()
-        serverHandler.GetStepGoal()
+        // get gameGoal and stepGoal using server -- deprecated* switched to use UserDefaults
+//        serverHandler.GetGameGoal()
+//        serverHandler.GetStepGoal()
+//        DispatchQueue.main.async {
+//            self.gameGoal = self.serverHandler.gameGoal
+//            self.stepGoal = self.serverHandler.stepGoal
+//            self.gameGoalTF.text = String(self.gameGoal)  // Update the label
+//            self.stepGoalTF.text = String(self.stepGoal)  // Update the label
+//        }
         DispatchQueue.main.async {
-            self.gameGoal = self.serverHandler.gameGoal
-            self.stepGoal = self.serverHandler.stepGoal
-            self.gameGoalTF.text = String(self.gameGoal)  // Update the label
-            self.stepGoalTF.text = String(self.stepGoal)  // Update the label
+            self.gameGoalTF.text = String(self.defaults.integer(forKey: "gameGoal"))
+            self.stepGoalTF.text = String(self.defaults.integer(forKey: "stepGoal"))
         }
         
     }
@@ -167,8 +216,11 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         stepOfTheDayLabel.font = UIFont(name: "04b_19", size: 22)
         scoreOfTheDayNumLabel.font = UIFont(name: "04b_19", size: 25)
         stepOfTheDayNumLabel.font = UIFont(name: "04b_19", size: 25)
-        serverHandler.GetHighestScore()
-        highestScoreEverNumLabel.text = "\(serverHandler.highestScoreEver)"
+        DispatchQueue.main.async {
+            self.highestScoreEverNumLabel.text = String(self.defaults.integer(forKey: "highest_score"))
+        }
+//        serverHandler.GetHighestScore()
+//        highestScoreEverNumLabel.text = "\(serverHandler.highestScoreEver)"
     }
     
     // Outlets and Actions for daily game goal
@@ -183,7 +235,13 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         print("Reset game goal: \(gameGoalTF.text!)")
         if (gameGoalTF.text != "") {
             let resetValue: Int? = Int(gameGoalTF.text!)
-            self.serverHandler.UpdateGameGoal(game_goal: resetValue!)
+            // update global game goal
+            defaults.set(resetValue, forKey: "gameGoal")
+            // update today's game goal
+            let todayString = getTodayString()
+            let key = "\(todayString)-gameGoal"
+            defaults.set(resetValue, forKey: key)
+//            self.serverHandler.UpdateGameGoal(game_goal: resetValue!)
         }
     }
     @IBOutlet weak var gameGoalResetLabel: UILabel!
@@ -194,16 +252,21 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
     @IBAction func chooseStepGoal(_ sender: Any) {
         
     }
-    @IBAction func stepGoalResetBtn(_ sender: Any) {
-        
-    }
 
+    @IBOutlet weak var stepGoalResetBtn: UIButton!
+    
     
     @IBAction func resetStepGoal(_ sender: Any) {
         print("Reset step goal: \(stepGoalTF.text!)")
         if (stepGoalTF.text != "") {
             let resetValue: Int? = Int(stepGoalTF.text!)
-            self.serverHandler.UpdateStepGoal(step_goal: resetValue!)
+            // update global step goal
+            defaults.set(resetValue, forKey: "stepGoal")
+            // update today's step goal
+            let todayString = getTodayString()
+            let key = "\(todayString)-stepGoal"
+            defaults.set(resetValue, forKey: key)
+//            self.serverHandler.UpdateStepGoal(step_goal: resetValue!)
         }
     }
     
@@ -213,6 +276,22 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         view.endEditing(true)
     }
     
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
+    
+    func getTodayString() -> String {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        let year = Int(formatter.string(from: today))!
+        formatter.dateFormat = "M"
+        let month = Int(formatter.string(from: today))!
+        formatter.dateFormat = "dd"
+        let day = Int(formatter.string(from: today))!
+        let todayString = String("\(year)-\(month)-\(day)")
+        return todayString
+    }
     // DON'T use - tap gesture messed up with tapping on calendar
 //    @IBAction func didCancelKeyboard(_ sender: Any) {
 //        self.gameGoalTF.resignFirstResponder()
