@@ -51,7 +51,7 @@
                                     <attributedString key="attributedTitle">
                                         <fragment content="   ">
                                             <attributes>
-                                                <font key="NSFont" metaFont="toolTip"/>
+                                                <font key="NSFont" usesAppearanceFont="YES"/>
                                                 <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                             </attributes>
                                         </fragment>
@@ -268,8 +268,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="    "/>
                                 <connections>
-                                    <action selector="resetStepGoal:" destination="Jo1-Ar-4IW" eventType="touchUpInside" id="1Zv-iS-AD1"/>
-                                    <action selector="stepGoalResetBtn:" destination="Jo1-Ar-4IW" eventType="touchUpInside" id="8XW-8X-OP0"/>
+                                    <action selector="resetStepGoal:" destination="Jo1-Ar-4IW" eventType="touchUpInside" id="Dvl-du-Bj5"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Date Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TEg-Nr-u5p">
@@ -423,6 +422,7 @@
                         <outlet property="scoreOfTheDayLabel" destination="joS-k9-oip" id="4na-Kn-jIk"/>
                         <outlet property="scoreOfTheDayNumLabel" destination="lyS-uf-f1l" id="1Kr-ad-zl8"/>
                         <outlet property="selectedDataLabel" destination="TEg-Nr-u5p" id="dbE-Ux-JWh"/>
+                        <outlet property="stepGoalResetBtn" destination="1mL-cI-GlE" id="alS-KV-Lqc"/>
                         <outlet property="stepGoalResetLabel" destination="ny6-Eu-Emv" id="HVa-r4-Zck"/>
                         <outlet property="stepGoalTF" destination="TOz-Ts-wEB" id="i0a-c9-eea"/>
                         <outlet property="stepOfTheDayLabel" destination="FfF-xJ-Csd" id="j6e-Vb-hKP"/>

@@ -10,10 +10,11 @@ import CoreMotion
 
 class HomeViewController: UIViewController, GameViewControllerDelegate{
     
-    private let serverHandler = ServerHalder()
+//    private let serverHandler = ServerHalder() -- switched to UserDefaults to store data
 //    let activityManager = CMMotionActivityManager()
     let pedometer = CMPedometer()
     var stepsWalked = 0
+    let defaults = UserDefaults.standard
     @IBOutlet weak var playBtn: UIButton!
     
     @IBOutlet weak var resultLabel: UILabel!
@@ -38,14 +39,32 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+//        _checkUserDefaults()
         updatePedometer()
         playBtnInit()
         myPageBtnInit()
+        goalsInit()
         resultLabel.font = UIFont(name: "04b_19", size: 30)
         playLabel.font = UIFont(name: "04b_19", size: 30)
         myPageLabel.font = UIFont(name: "04b_19", size: 30)
         runRunLabel.font = UIFont(name: "04b_19", size: 25)
         mustangLabel.font = UIFont(name: "04b_19", size: 45)
+    }
+    
+    func _checkUserDefaults() {
+        print(UserDefaults.standard.dictionaryRepresentation().keys)
+        // test data
+//        let date = "2021-12-7"
+//        let gameGoalKey = "\(date)-gameGoal"
+//        let stepGoalKey = "\(date)-stepGoal"
+//        let scoreKey = "\(date)-score"
+//        let stepKey = "\(date)-step"
+//
+//        defaults.set(10, forKey: gameGoalKey)
+//        defaults.set(0, forKey: scoreKey)
+//        defaults.set(1000, forKey: stepGoalKey)
+//        defaults.set(2000, forKey: stepKey)
+
     }
     
     func myPageBtnInit() {
@@ -64,6 +83,33 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
         playBtn.titleLabel?.adjustsFontSizeToFitWidth = true
     }
     
+    func goalsInit() {
+        if (!isKeyPresentInUserDefaults(key: "stepGoal")) {
+            print("Initializing step goal to 1000")
+            defaults.set(1000, forKey: "stepGoal")
+        }
+        
+        if (!isKeyPresentInUserDefaults(key: "gameGoal")) {
+            print("Initializing step goal to 5")
+            defaults.set(5, forKey: "gameGoal")
+        }
+        
+        // store goal to today's data
+        let todayString = getTodayString()
+        let gameGoalKey = "\(todayString)-gameGoal"
+        let stepGoalKey = "\(todayString)-stepGoal"
+        let scoreKey = "\(todayString)-score"
+        if (!isKeyPresentInUserDefaults(key: gameGoalKey)) {
+            defaults.set(defaults.integer(forKey:"gameGoal"), forKey: gameGoalKey)
+        }
+        if (!isKeyPresentInUserDefaults(key: stepGoalKey)) {
+            defaults.set(defaults.integer(forKey:"stepGoal"), forKey: stepGoalKey)
+        }
+        if (!isKeyPresentInUserDefaults(key: scoreKey)) {
+            defaults.set(0, forKey: scoreKey)
+        }
+    }
+    
     func updatePedometer(){
         let sem = DispatchSemaphore(value: 0)
 //        serverHandler.GetStepGoal()
@@ -78,6 +124,12 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
             }
         }
         sem.wait()
+        // update stepsWalked
+        let todayString = getTodayString()
+        let key = String("\(todayString)-step")
+        print(key)
+        defaults.set(self.stepsWalked, forKey: key)
+        // also initialize every
         // send update data to server
 //        serverHandler.UpdateStep(step: self.stepsWalked)
     }
@@ -90,23 +142,67 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
     
     
     func CatchResult(controller: GameViewController, data: Int) {
-        // get game goal from the server
-        serverHandler.GetGameGoal()
-        scoregoal = serverHandler.gameGoal
+        // Catch the result from the game
         DispatchQueue.main.async {
             self.resultLabel.text = "Score: \(data)"
         }
-        // Catch the result from the game
-        if(data >= scoregoal){      // If reaches the goal
-            ispassed = true
+        let todayString = getTodayString()
+        let key = String("\(todayString)-score")
+        print(key)
+        //update today's score
+        if (!isKeyPresentInUserDefaults(key: key)) {
+            defaults.set(data, forKey: key)
+        } else {
+            let value = defaults.integer(forKey: key)
+            if (data > value) {
+                // if score is higher, update
+                defaults.set(data, forKey: key)
+            }
+        }
+        
+        // update highest score ever
+        if (!isKeyPresentInUserDefaults(key: "highest_score")) {
+            defaults.set(data, forKey: "highest_score")
+        } else {
+            let value = defaults.integer(forKey: "highest_score")
+            if (data > value) {
+                // if score is higher, update
+                defaults.set(data, forKey: "highest_score")
+            }
+        }
+        
+        // get game goal from the server
+//        serverHandler.GetGameGoal()
+//        scoregoal = serverHandler.gameGoal
+        
+//        if(data >= scoregoal){      // If reaches the goal
+//            ispassed = true
+            
             // update the backend
-            self.serverHandler.UpdateScore(score: data)
-        }
-        else{                   // If not reaches the goal
-            ispassed = false
-            self.serverHandler.UpdateScore(score: data)
-        }
+//            self.serverHandler.UpdateScore(score: data)
+//        }
+//        else{                   // If not reaches the goal
+//            ispassed = false
+//            self.serverHandler.UpdateScore(score: data)
+//        }
 
+    }
+    
+    func getTodayString() -> String {
+        let today = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy"
+        let year = Int(formatter.string(from: today))!
+        formatter.dateFormat = "M"
+        let month = Int(formatter.string(from: today))!
+        formatter.dateFormat = "dd"
+        let day = Int(formatter.string(from: today))!
+        let todayString = String("\(year)-\(month)-\(day)")
+        return todayString
+    }
+    
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
     }
 
 }
