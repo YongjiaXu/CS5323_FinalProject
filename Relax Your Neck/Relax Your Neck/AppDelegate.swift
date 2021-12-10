@@ -11,11 +11,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        return true
+           UINavigationBar.appearance().titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: "04b_19", size: 20)!
+            ]
+
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "04b_19", size: 20)!], for: UIControl.State.normal)
+        UIBarButtonItem.appearance().tintColor = .systemYellow
+
+      return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -45,7 +45,9 @@ day = datetime.now().day
 # db.calendar.insert_one({'year': int(year), 'month': int(month), 'day': int(day)})
 # db.calendar.update_one({'year': 2021, 'month': 12, 'day': 8}, {'$set': {'highest_score': 0}})
 # year, month, day, highest_score, steps, game_goal, step_goal
-db.calendar.insert_one({'year': 2021, 'month': 12, 'day': 7, 'step': 50, 'step_goal': 25, 'highest_score': 0, 'game_goal': 0})
+# db.calendar.insert_one({'year': 2021, 'month': 12, 'day': 7, 'step': 50, 'step_goal': 25, 'highest_score': 0, 'game_goal': 0})
+# db.calendar.insert_one({'year': 2021, 'month': 12, 'day': 7, 'step': 50, 'step_goal': 25, 'highest_score': 0, 'game_goal': 0})
+
 db.calendar.delete_one({'year': 2021, 'month': 12, 'day': 7})
 for a in db.calendar.find():
     print(a)

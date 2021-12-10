@@ -47,11 +47,11 @@ class CheckAchievement(BaseHandler):
             step_goal = entry['step_goal']
             print('Score: {} Game_goal: {} Step: {} Step_goal: {}'.format(score, game_goal, step, step_goal))
             if score >= game_goal or step >= step_goal:
-                self.write_json({'ret': True})
+                self.write_json({'ret': 1}) # achieved
             else:
-                self.write_json({'ret': False})
+                self.write_json({'ret': 0}) # not achieved
         else:
-            self.write_json({'ret': False})
+            self.write_json({'ret': 2}) # not checked in
 
 class UpdateScore(BaseHandler):
     def post(self):
@@ -89,6 +89,7 @@ class UpdateStep(BaseHandler):
         else:
             # insert new entry
             # get previous step_goal and game_goal
+            # this is always called first
             ret = self.db.user.find_one({'step_goal': {'$exists': True}, 'game_goal': {'$exists': True}})
             step_goal = ret['step_goal']
             game_goal = ret['game_goal']
@@ -149,3 +150,36 @@ class GetStepGoal(BaseHandler):
         if ret:
             self.write_json({'ret': ret['step_goal']})
 
+class GetHighestScore(BaseHandler):
+    def get(self):
+        highest_score = 0
+        for a in self.db.calendar.find():
+            if a['highest_score'] > highest_score:
+                highest_score = a['highest_score']
+        self.write_json({'ret': highest_score})
+
+class GetScoreOfTheDay(BaseHandler):
+    def post(self):
+        inputData = json.loads(self.request.body.decode("utf-8"))  
+        print(inputData['year'], inputData['month'], inputData['day']) 
+        year = inputData['year']
+        month = inputData['month']
+        day = inputData['day']
+        entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+        if entry:
+            self.write_json({'ret': entry['highest_score']})
+        else:
+            self.write_json({'ret': 0})
+
+class GetStepOfTheDay(BaseHandler):
+    def post(self):
+        inputData = json.loads(self.request.body.decode("utf-8"))  
+        print(inputData['year'], inputData['month'], inputData['day']) 
+        year = inputData['year']
+        month = inputData['month']
+        day = inputData['day']
+        entry = self.db.calendar.find_one({'year': int(year), 'month': int(month), 'day': int(day)})
+        if entry:
+            self.write_json({'ret': entry['step']})
+        else:
+            self.write_json({'ret': 0})
