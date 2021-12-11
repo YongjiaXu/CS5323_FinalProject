@@ -28,6 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     var height = CGFloat()              // The current height of the mustang
     var detected = Bool()               // Is face detected?
     var detecttolerance = Int()     // The tolernce of undetected, max is 5.
+    var lastmov = Int()
     
     
     var wallPair = SKNode()     // A pair of top and bottom wall
@@ -139,6 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
     
     // Initialize the nose  detection
     func CreateDetection(){
+        self.lastmov = 0
         self.detecttolerance = 0;   // Set all variables to init
         self.detected = false
         self.bridge.loadHaarCascade(withFilename: "nose")   // Load the data for nose
@@ -174,7 +176,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate{
                 // Maybe it got wrong detection, we choose to discard it.
             }
             else{
-                height = newheight+100  // Else update the height for character
+                if(newheight>height){
+                    if(lastmov == 1){
+                        height = newheight+100  // Else update the height for character
+                    }
+                    else{
+                        lastmov = lastmov + 1
+                    }
+                }
+                else if(height>newheight){
+                    if(lastmov != 0){
+                        lastmov = lastmov-1
+                    }
+                    else{
+                        height = newheight+100  // Else update the height for character
+                    }
+                }
+                //height = newheight+100  // Else update the height for character
+                
             }
             detecttolerance = 0     // Update the detecttolerance, mark it as detected.
             detected = true
