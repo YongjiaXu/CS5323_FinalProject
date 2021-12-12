@@ -8,7 +8,7 @@
 import UIKit
 import CoreMotion
 
-class HomeViewController: UIViewController, GameViewControllerDelegate{
+class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
     
 //    private let serverHandler = ServerHalder() -- switched to UserDefaults to store data
 //    let activityManager = CMMotionActivityManager()
@@ -48,23 +48,22 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
         playLabel.font = UIFont(name: "04b_19", size: 30)
         myPageLabel.font = UIFont(name: "04b_19", size: 30)
         runRunLabel.font = UIFont(name: "04b_19", size: 25)
-        mustangLabel.font = UIFont(name: "04b_19", size: 45)
+        mustangLabel.font = UIFont(name: "04b_19", size: 35)
     }
     
     func _checkUserDefaults() {
-//        print(UserDefaults.standard.dictionaryRepresentation().keys)
+        print(UserDefaults.standard.dictionaryRepresentation().keys)
         // test data
-//        let date = "2021-12-10"
+//        let date = "2021-12-7"
 //        let gameGoalKey = "\(date)-gameGoal"
 //        let stepGoalKey = "\(date)-stepGoal"
 //        let scoreKey = "\(date)-score"
 //        let stepKey = "\(date)-step"
 //
 //        defaults.set(10, forKey: gameGoalKey)
-//        defaults.set(54, forKey: scoreKey)
+//        defaults.set(0, forKey: scoreKey)
 //        defaults.set(1000, forKey: stepGoalKey)
-//        defaults.set(5344, forKey: stepKey)
-//        defaults.set(54, forKey: "highest_score")
+//        defaults.set(2000, forKey: stepKey)
 
     }
     
@@ -74,20 +73,6 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
         myPageBtn.titleLabel?.minimumScaleFactor = 0.5
         myPageBtn.titleLabel?.numberOfLines = 0
         myPageBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        myPageBtn.addTarget(self, action: #selector(startHighlightMyPage), for: .touchDown)
-        myPageBtn.addTarget(self, action: #selector(stopHighlightMyPage), for: .touchUpInside)
-        myPageBtn.addTarget(self, action: #selector(stopHighlightMyPage), for: .touchUpOutside)
-    }
-    
-    @objc func startHighlightMyPage(sender: UIButton) {
-        myPageBtn.layer.backgroundColor = UIColor.white.cgColor
-        myPageBtn.layer.masksToBounds = true
-        myPageBtn.layer.cornerRadius = 7
-    }
-    @objc func stopHighlightMyPage(sender: UIButton) {
-        myPageBtn.layer.backgroundColor = UIColor.systemYellow.cgColor
-        myPageBtn.layer.masksToBounds = true
-        myPageBtn.layer.cornerRadius = 3
     }
     
     func playBtnInit() {
@@ -96,22 +81,7 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
         playBtn.titleLabel?.minimumScaleFactor = 0.5
         playBtn.titleLabel?.numberOfLines = 0
         playBtn.titleLabel?.adjustsFontSizeToFitWidth = true
-        playBtn.addTarget(self, action: #selector(startHighlightPlay), for: .touchDown)
-        playBtn.addTarget(self, action: #selector(stopHighlightPlay), for: .touchUpInside)
-        playBtn.addTarget(self, action: #selector(stopHighlightPlay), for: .touchUpOutside)
     }
-    
-    @objc func startHighlightPlay(sender: UIButton) {
-        playBtn.layer.backgroundColor = UIColor.white.cgColor
-        playBtn.layer.masksToBounds = true
-        playBtn.layer.cornerRadius = 7
-    }
-    @objc func stopHighlightPlay(sender: UIButton) {
-        playBtn.layer.backgroundColor = UIColor(rgb: 0xC8102E).cgColor
-        playBtn.layer.masksToBounds = true
-        playBtn.layer.cornerRadius = 3
-    }
-    
     
     func goalsInit() {
         if (!isKeyPresentInUserDefaults(key: "stepGoal")) {
@@ -165,13 +135,13 @@ class HomeViewController: UIViewController, GameViewControllerDelegate{
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? GameViewController{
+        if let vc = segue.destination as? SceneKitViewController{
             vc.delegate = self          // A function for passing delegate
         }
     }
     
     
-    func CatchResult(controller: GameViewController, data: Int) {
+    func CatchResult(controller: SceneKitViewController, data: Int) {
         // Catch the result from the game
         DispatchQueue.main.async {
             self.resultLabel.text = "Score: \(data)"
