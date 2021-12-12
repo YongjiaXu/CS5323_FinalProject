@@ -73,6 +73,20 @@ class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
         myPageBtn.titleLabel?.minimumScaleFactor = 0.5
         myPageBtn.titleLabel?.numberOfLines = 0
         myPageBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        myPageBtn.addTarget(self, action: #selector(startHighlightMyPage), for: .touchDown)
+        myPageBtn.addTarget(self, action: #selector(stopHighlightMyPage), for: .touchUpInside)
+        myPageBtn.addTarget(self, action: #selector(stopHighlightMyPage), for: .touchUpOutside)
+    }
+
+    @objc func startHighlightMyPage(sender: UIButton) {
+        myPageBtn.layer.backgroundColor = UIColor.white.cgColor
+        myPageBtn.layer.masksToBounds = true
+        myPageBtn.layer.cornerRadius = 7
+    }
+    @objc func stopHighlightMyPage(sender: UIButton) {
+        myPageBtn.layer.backgroundColor = UIColor.systemYellow.cgColor
+        myPageBtn.layer.masksToBounds = true
+        myPageBtn.layer.cornerRadius = 3
     }
     
     func playBtnInit() {
@@ -81,6 +95,20 @@ class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
         playBtn.titleLabel?.minimumScaleFactor = 0.5
         playBtn.titleLabel?.numberOfLines = 0
         playBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        playBtn.addTarget(self, action: #selector(startHighlightPlay), for: .touchDown)
+        playBtn.addTarget(self, action: #selector(stopHighlightPlay), for: .touchUpInside)
+        playBtn.addTarget(self, action: #selector(stopHighlightPlay), for: .touchUpOutside)
+    }
+
+    @objc func startHighlightPlay(sender: UIButton) {
+        playBtn.layer.backgroundColor = UIColor.white.cgColor
+        playBtn.layer.masksToBounds = true
+        playBtn.layer.cornerRadius = 7
+    }
+    @objc func stopHighlightPlay(sender: UIButton) {
+        playBtn.layer.backgroundColor = UIColor(rgb: 0xC8102E).cgColor
+        playBtn.layer.masksToBounds = true
+        playBtn.layer.cornerRadius = 3
     }
     
     func goalsInit() {
