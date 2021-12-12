@@ -10,6 +10,9 @@
 		196875D089C3267E5B694891 /* Pods_Relax_Your_Neck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F707C8A05C34FCB1F88F570 /* Pods_Relax_Your_Neck.framework */; };
 		C266A75F275F1ABB008BA08C /* ServerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266A75E275F1ABB008BA08C /* ServerHandler.swift */; };
 		C266A763275F2533008BA08C /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C266A762275F2533008BA08C /* UserViewController.swift */; };
+		CC15750C2765048400D621D2 /* SceneKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC15750B2765048400D621D2 /* SceneKitViewController.swift */; };
+		CC15750E276507F600D621D2 /* SNGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC15750D276507F600D621D2 /* SNGameScene.swift */; };
+		CC157510276583E500D621D2 /* SNGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC15750F276583E500D621D2 /* SNGameScene.sks */; };
 		CC1FDF512751AAF2000D1D99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */; };
 		CC1FDF532751AAF2000D1D99 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF522751AAF2000D1D99 /* GameScene.sks */; };
 		CC1FDF552751AAF2000D1D99 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = CC1FDF542751AAF2000D1D99 /* Actions.sks */; };
@@ -32,6 +35,9 @@
 		3E21FB663B43DE34C09FF6BE /* Pods-Relax Your Neck.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Relax Your Neck.debug.xcconfig"; path = "Target Support Files/Pods-Relax Your Neck/Pods-Relax Your Neck.debug.xcconfig"; sourceTree = "<group>"; };
 		C266A75E275F1ABB008BA08C /* ServerHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerHandler.swift; sourceTree = "<group>"; };
 		C266A762275F2533008BA08C /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		CC15750B2765048400D621D2 /* SceneKitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneKitViewController.swift; sourceTree = "<group>"; };
+		CC15750D276507F600D621D2 /* SNGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SNGameScene.swift; sourceTree = "<group>"; };
+		CC15750F276583E500D621D2 /* SNGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SNGameScene.sks; sourceTree = "<group>"; };
 		CC1FDF4D2751AAF2000D1D99 /* Relax Your Neck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Relax Your Neck.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC1FDF522751AAF2000D1D99 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -113,11 +119,14 @@
 				CC1FDF6B2753172D000D1D99 /* 04B_19__.TTF */,
 				CC1FDF502751AAF2000D1D99 /* AppDelegate.swift */,
 				CC1FDF522751AAF2000D1D99 /* GameScene.sks */,
+				CC15750F276583E500D621D2 /* SNGameScene.sks */,
 				CC1FDF542751AAF2000D1D99 /* Actions.sks */,
 				CC1FDF562751AAF2000D1D99 /* GameScene.swift */,
 				CC1FDF672752F049000D1D99 /* RandomFunc.swift */,
 				CC1FDF582751AAF2000D1D99 /* GameViewController.swift */,
 				CC1FDF5A2751AAF2000D1D99 /* Main.storyboard */,
+				CC15750B2765048400D621D2 /* SceneKitViewController.swift */,
+				CC15750D276507F600D621D2 /* SNGameScene.swift */,
 				C266A762275F2533008BA08C /* UserViewController.swift */,
 				C266A75E275F1ABB008BA08C /* ServerHandler.swift */,
 				CC1FDF6927530128000D1D99 /* HomeViewController.swift */,
@@ -206,6 +215,7 @@
 				CC1FDF612751AAF6000D1D99 /* LaunchScreen.storyboard in Resources */,
 				CC1FDF552751AAF2000D1D99 /* Actions.sks in Resources */,
 				CC1FDF86275E936C000D1D99 /* nose.xml in Resources */,
+				CC157510276583E500D621D2 /* SNGameScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,9 +273,11 @@
 				CC1FDF76275E7D31000D1D99 /* VideoAnalgesic.swift in Sources */,
 				CC1FDF682752F049000D1D99 /* RandomFunc.swift in Sources */,
 				C266A75F275F1ABB008BA08C /* ServerHandler.swift in Sources */,
+				CC15750E276507F600D621D2 /* SNGameScene.swift in Sources */,
 				CC1FDF572751AAF2000D1D99 /* GameScene.swift in Sources */,
 				CC1FDF74275E7D31000D1D99 /* OpenCVBridge.mm in Sources */,
 				CC1FDF592751AAF2000D1D99 /* GameViewController.swift in Sources */,
+				CC15750C2765048400D621D2 /* SceneKitViewController.swift in Sources */,
 				CC1FDF512751AAF2000D1D99 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -418,7 +430,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q3MAQ3CMN;
+				DEVELOPMENT_TEAM = F69WJ27LN4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -441,7 +453,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "FinalProject.Relax-Your-Neck-BX";
+				PRODUCT_BUNDLE_IDENTIFIER = "FinalProject.Relax-Your-Neck";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Relax Your Neck/Relax-Your-Neck-Bridging-Header.h";
@@ -458,7 +470,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8Q3MAQ3CMN;
+				DEVELOPMENT_TEAM = F69WJ27LN4;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -481,7 +493,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "FinalProject.Relax-Your-Neck-BX";
+				PRODUCT_BUNDLE_IDENTIFIER = "FinalProject.Relax-Your-Neck";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Relax Your Neck/Relax-Your-Neck-Bridging-Header.h";
