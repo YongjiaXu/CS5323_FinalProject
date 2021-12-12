@@ -195,7 +195,7 @@ class SNGameScene: SKScene, SKPhysicsContactDelegate {
                     self.createWalls()      // Create walls and let them move
                 })
                 
-                let delay = SKAction.wait(forDuration: 1.6)     // Set delays between wall pairs
+                let delay = SKAction.wait(forDuration: 1.5)     // Set delays between wall pairs
                 let SpawnDelay = SKAction.sequence([spawn, delay])
                 let spawnDelayForever = SKAction.repeatForever(SpawnDelay)
                 self.run(spawnDelayForever)     // That will be runned forever
@@ -269,7 +269,7 @@ class SNGameScene: SKScene, SKPhysicsContactDelegate {
         wallPair.addChild(btmWall)
         
         // The location of those two walls should be random
-        let randomPosition = CGFloat.random(min: -150, max: 100)
+        let randomPosition = CGFloat.random(min: -150, max: 150)
         wallPair.position.y = wallPair.position.y + randomPosition
         wallPair.addChild(scoreNode)
         
