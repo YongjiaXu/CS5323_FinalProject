@@ -154,8 +154,6 @@ class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
         let key = String("\(todayString)-step")
         print(key)
         defaults.set(self.stepsWalked, forKey: key)
-        // also initialize every
-        // send update data to server
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
