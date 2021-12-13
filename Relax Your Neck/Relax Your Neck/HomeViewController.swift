@@ -10,8 +10,6 @@ import CoreMotion
 
 class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
     
-//    private let serverHandler = ServerHalder() -- switched to UserDefaults to store data
-//    let activityManager = CMMotionActivityManager()
     let pedometer = CMPedometer()
     var stepsWalked = 0
     let defaults = UserDefaults.standard
@@ -140,7 +138,6 @@ class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
     
     func updatePedometer(){
         let sem = DispatchSemaphore(value: 0)
-//        serverHandler.GetStepGoal()
         if CMPedometer.isStepCountingAvailable(){
             let startToday = Calendar.current.startOfDay(for: Date())
             pedometer.queryPedometerData(from: startToday, to: Date())
@@ -157,9 +154,6 @@ class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
         let key = String("\(todayString)-step")
         print(key)
         defaults.set(self.stepsWalked, forKey: key)
-        // also initialize every
-        // send update data to server
-//        serverHandler.UpdateStep(step: self.stepsWalked)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -198,21 +192,6 @@ class HomeViewController: UIViewController, SceneKitViewControllerDelegate{
                 defaults.set(data, forKey: "highest_score")
             }
         }
-        
-        // get game goal from the server
-//        serverHandler.GetGameGoal()
-//        scoregoal = serverHandler.gameGoal
-        
-//        if(data >= scoregoal){      // If reaches the goal
-//            ispassed = true
-            
-            // update the backend
-//            self.serverHandler.UpdateScore(score: data)
-//        }
-//        else{                   // If not reaches the goal
-//            ispassed = false
-//            self.serverHandler.UpdateScore(score: data)
-//        }
 
     }
     

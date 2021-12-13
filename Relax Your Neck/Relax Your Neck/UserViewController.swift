@@ -9,7 +9,6 @@ import UIKit
 import FSCalendar // referenced: https://www.youtube.com/watch?v=5Jwlet8L84w&t=382s
 import SPConfetti
 class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDelegate {
-//    private let serverHandler = ServerHalder() - switched to UserDefaults
     let defaults = UserDefaults.standard
     var stepOfTheDay = 0
     var scoreOfTheDay = 0
@@ -82,7 +81,6 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         formatter.dateFormat = "dd"
         let day = Int(formatter.string(from: today))!
         selectedDataLabel.text = "\(months[month-1]) \(day) \(year)"
-//        serverHandler.CheckAchievement(year: year, month: month, day: day)
         self.updateAchieveStatus(year: year, month: month, day: day)
     }
     
@@ -103,7 +101,6 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         print("\(year) \(month) \(day)")
         selectedDataLabel.text = "\(months[month-1]) \(day) \(year)"
         
-//        serverHandler.CheckAchievement(year: year, month: month, day: day)
         self.updateAchieveStatus(year: year, month: month, day: day)
     }
     
@@ -135,30 +132,22 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         var achieve_str = ""
         if (achieved == 1) {
             achieve_str = "Daily Goal Achieved!"
-//            serverHandler.GetStepOfTheDay(year: year, month: month, day: day)
-//            serverHandler.GetScoreOfTheDay(year: year, month: month, day: day)
             DispatchQueue.main.async {
                 self.stepOfTheDayLabel.text = "Step of the day"
                 self.scoreOfTheDayLabel.text = "Score of the day"
                 self.stepOfTheDayNumLabel.text = "\(self.stepOfTheDay)"
                 self.scoreOfTheDayNumLabel.text = "\(self.scoreOfTheDay)"
                 self.achieveStrLabel.textColor = UIColor.systemYellow
-//                self.stepOfTheDayNumLabel.text = "\(self.serverHandler.stepOfTheDay)"
-//                self.scoreOfTheDayNumLabel.text = "\(self.serverHandler.scoreOfTheDay)"
             }
             SPConfetti.startAnimating(.centerWidthToDown, particles: [.star, .arc], duration: 1)
         } else if (achieved == 0) {
             achieve_str = "Daily Goal Not Achieved."
-//            serverHandler.GetStepOfTheDay(year: year, month: month, day: day)
-//            serverHandler.GetScoreOfTheDay(year: year, month: month, day: day)
             DispatchQueue.main.async {
                 self.stepOfTheDayLabel.text = "Step of the day"
                 self.scoreOfTheDayLabel.text = "Score of the day"
                 self.stepOfTheDayNumLabel.text = "\(self.stepOfTheDay)"
                 self.scoreOfTheDayNumLabel.text = "\(self.scoreOfTheDay)"
                 self.achieveStrLabel.textColor = UIColor.gray
-//                self.stepOfTheDayNumLabel.text = "\(self.serverHandler.stepOfTheDay)"
-//                self.scoreOfTheDayNumLabel.text = "\(self.serverHandler.scoreOfTheDay)"
             }
         } else {
             achieve_str = "No Check-In Record."
@@ -189,15 +178,6 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         gameGoalTF.delegate = self
         stepGoalTF.font = UIFont(name: "04b_19", size: 18)
         gameGoalTF.font = UIFont(name: "04b_19", size: 18)
-        // get gameGoal and stepGoal using server -- deprecated* switched to use UserDefaults
-//        serverHandler.GetGameGoal()
-//        serverHandler.GetStepGoal()
-//        DispatchQueue.main.async {
-//            self.gameGoal = self.serverHandler.gameGoal
-//            self.stepGoal = self.serverHandler.stepGoal
-//            self.gameGoalTF.text = String(self.gameGoal)  // Update the label
-//            self.stepGoalTF.text = String(self.stepGoal)  // Update the label
-//        }
         DispatchQueue.main.async {
             self.gameGoalTF.text = String(self.defaults.integer(forKey: "gameGoal"))
             self.stepGoalTF.text = String(self.defaults.integer(forKey: "stepGoal"))
@@ -220,8 +200,6 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
         DispatchQueue.main.async {
             self.highestScoreEverNumLabel.text = String(self.defaults.integer(forKey: "highest_score"))
         }
-//        serverHandler.GetHighestScore()
-//        highestScoreEverNumLabel.text = "\(serverHandler.highestScoreEver)"
     }
     
     // Outlets and Actions for daily game goal
@@ -242,7 +220,6 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
             let todayString = getTodayString()
             let key = "\(todayString)-gameGoal"
             defaults.set(resetValue, forKey: key)
-//            self.serverHandler.UpdateGameGoal(game_goal: resetValue!)
         }
     }
     @IBOutlet weak var gameGoalResetLabel: UILabel!
@@ -267,7 +244,6 @@ class UserViewController: UIViewController, FSCalendarDelegate, UITextFieldDeleg
             let todayString = getTodayString()
             let key = "\(todayString)-stepGoal"
             defaults.set(resetValue, forKey: key)
-//            self.serverHandler.UpdateStepGoal(step_goal: resetValue!)
         }
     }
     
