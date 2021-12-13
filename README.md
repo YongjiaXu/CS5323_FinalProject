@@ -9,3 +9,10 @@ Relax your neck is a single endless runner game that allows users to navigate th
   - SAConfetti
 - SpriteKit
 - SceneKit & ARKit
+
+## Interface 
+![alt text](https://github.com/YongjiaXu/CS5323_FinalProject/blob/master/interface.png)
+
+## Links
+- Presentation: https://docs.google.com/presentation/d/1OEBjVTAofPbq-B2sL_qTbRTCHyckf7cQ_wT6Hoz-lXI/edit?usp=sharing
+- Video: https://www.dropbox.com/sh/jiprw5n8jxqyzj3/AADqITH0FJdffXRp85WJKG4_a?dl=0
